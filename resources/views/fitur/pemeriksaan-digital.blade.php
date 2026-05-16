@@ -1,89 +1,180 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Ini yang penting supaya kodenya 'nyala' -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Form Pemeriksaan Balita</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: sans-serif; background: #f5f5f0; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 2rem; }
+
+    .form-wrap { max-width: 520px; width: 100%; background: #fff; border: 0.5px solid #e2e2dd; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
+
+    /* Header */
+    .form-header { padding: 1.5rem; border-bottom: 0.5px solid #e2e2dd; display: flex; align-items: center; gap: 14px; }
+    .header-icon { width: 44px; height: 44px; border-radius: 12px; background: #E1F5EE; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .header-icon i { font-size: 22px; color: #0F6E56; }
+    .header-title { font-size: 17px; font-weight: 600; color: #1a1a18; margin: 0; }
+    .header-sub { font-size: 13px; color: #888780; margin: 0; margin-top: 2px; }
+
+    /* Step bar */
+    .step-bar { display: flex; align-items: center; padding: 0 1.5rem; border-bottom: 0.5px solid #e2e2dd; background: #f8f8f5; }
+    .step { display: flex; align-items: center; gap: 6px; padding: 10px 0; font-size: 12px; color: #b4b2a9; flex: 1; }
+    .step.active { color: #0F6E56; }
+    .step.done { color: #5DCAA5; }
+    .step-dot { width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid #d3d1c7; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; color: #b4b2a9; flex-shrink: 0; }
+    .step.active .step-dot { background: #1D9E75; border-color: #1D9E75; color: #fff; }
+    .step.done .step-dot { background: #E1F5EE; border-color: #5DCAA5; color: #0F6E56; font-size: 11px; }
+    .step-line { width: 1px; height: 18px; background: #e2e2dd; margin: 0 8px; }
+
+    /* Form body */
+    .form-body { padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem; }
+    .field-group { display: flex; flex-direction: column; gap: 6px; }
+    .field-label { font-size: 12px; color: #5f5e5a; display: flex; align-items: center; gap: 5px; }
+    .field-label i { font-size: 14px; }
+
+    /* Select */
+    .select-wrap { position: relative; }
+    .field-select { width: 100%; padding: 10px 36px 10px 12px; border: 0.5px solid #d3d1c7; border-radius: 8px; background: #f8f8f5; color: #1a1a18; font-size: 14px; appearance: none; cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s; }
+    .field-select:focus { outline: none; border-color: #1D9E75; box-shadow: 0 0 0 3px #E1F5EE; }
+    .select-icon { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); pointer-events: none; font-size: 14px; color: #888780; }
+
+    /* Metric cards */
+    .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .metric-card { background: #f8f8f5; border: 0.5px solid #e2e2dd; border-radius: 12px; padding: 1rem; }
+    .metric-icon-row { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+    .metric-icon { width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+    .metric-icon.green { background: #E1F5EE; }
+    .metric-icon.blue { background: #E6F1FB; }
+    .metric-icon.green i { color: #0F6E56; font-size: 16px; }
+    .metric-icon.blue i { color: #185FA5; font-size: 16px; }
+    .metric-label { font-size: 12px; color: #5f5e5a; }
+    .metric-input-wrap { position: relative; }
+    .metric-input { width: 100%; padding: 6px 36px 6px 0; border: none; border-bottom: 1.5px solid #d3d1c7; background: transparent; color: #1a1a18; font-size: 24px; font-weight: 500; font-family: sans-serif; transition: border-color 0.15s; }
+    .metric-input:focus { outline: none; border-bottom-color: #1D9E75; }
+    .metric-input::placeholder { color: #d3d1c7; }
+    .metric-unit { position: absolute; right: 0; bottom: 8px; font-size: 12px; color: #888780; font-weight: 500; }
+
+    /* Info strip */
+    .info-strip { display: flex; align-items: center; gap: 10px; background: #f8f8f5; border: 0.5px solid #e2e2dd; border-radius: 8px; padding: 10px 12px; }
+    .info-strip i { font-size: 16px; color: #888780; flex-shrink: 0; }
+    .info-strip span { font-size: 12px; color: #5f5e5a; }
+
+    /* Button */
+    .btn-simpan { width: 100%; padding: 13px; border-radius: 12px; background: #1D9E75; border: none; color: #fff; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: sans-serif; transition: background 0.15s, transform 0.1s; }
+    .btn-simpan:hover { background: #0F6E56; }
+    .btn-simpan:active { transform: scale(0.98); }
+    .btn-simpan i { font-size: 18px; }
+
+    /* Footer */
+    .form-footer { padding: 12px 1.5rem; border-top: 0.5px solid #e2e2dd; background: #f8f8f5; display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .form-footer i { font-size: 14px; color: #888780; }
+    .form-footer span { font-size: 11px; color: #888780; }
+  </style>
 </head>
-<!-- Container Form Pemeriksaan - Modern Pro Edition -->
-<div class="max-w-2xl mx-auto bg-white/80 backdrop-blur-xl rounded-[2.5rem] border border-slate-200 shadow-[0_20px_50px_rgba(0,0,0,0.05)] overflow-hidden">
-    
-    <!-- Header dengan Gradien Halus -->
-    <div class="p-8 bg-gradient-to-r from-emerald-50 via-teal-50 to-transparent border-b border-slate-100 flex items-center gap-4">
-        <div class="p-3 bg-emerald-500 rounded-2xl shadow-lg shadow-emerald-200">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-            </svg>
-        </div>
-        <div>
-            <h2 class="text-2xl font-black text-slate-800 tracking-tight">Input Pemeriksaan</h2>
-            <p class="text-sm text-slate-500 font-medium italic">Catat perkembangan bulanan si kecil</p>
-        </div>
+<body>
+
+<div class="form-wrap">
+
+  <!-- Header -->
+  <div class="form-header">
+    <div class="header-icon">
+      <i class="ti ti-report-medical"></i>
+    </div>
+    <div>
+      <p class="header-title">Input pemeriksaan</p>
+      <p class="header-sub">Catat perkembangan bulanan si kecil</p>
+    </div>
+  </div>
+
+  <!-- Step indicator -->
+  <div class="step-bar">
+    <div class="step done">
+      <div class="step-dot"><i class="ti ti-check" style="font-size:11px;"></i></div>
+      <span>Pilih balita</span>
+    </div>
+    <div class="step-line"></div>
+    <div class="step active">
+      <div class="step-dot">2</div>
+      <span>Data fisik</span>
+    </div>
+    <div class="step-line"></div>
+    <div class="step">
+      <div class="step-dot">3</div>
+      <span>Simpan</span>
+    </div>
+  </div>
+
+  <!-- Form body -->
+  <div class="form-body">
+
+    <!-- Pilih balita -->
+    <div class="field-group">
+      <label class="field-label">
+        <i class="ti ti-user-circle"></i>
+        Pilih balita
+      </label>
+      <div class="select-wrap">
+        <select class="field-select">
+          <option disabled selected>Cari nama balita...</option>
+          <option>Andi Wijaya</option>
+          <option>Siti Aminah</option>
+        </select>
+        <i class="ti ti-chevron-down select-icon"></i>
+      </div>
     </div>
 
-    <form action="#" method="POST" class="p-8 space-y-6">
-        <!-- Field Pilih Balita -->
-        <div class="space-y-2">
-            <label class="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-400 ml-1">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-                Pilih Balita
-            </label>
-            <div class="relative group">
-                <select class="appearance-none block w-full bg-slate-50 border-2 border-slate-100 text-slate-700 font-bold py-4 px-5 rounded-2xl leading-tight focus:outline-none focus:bg-white focus:border-emerald-500 transition-all cursor-pointer">
-                    <option disabled selected>Cari Nama Balita...</option>
-                    <option>Andi Wijaya</option>
-                    <option>Siti Aminah</option>
-                </select>
-                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-400 group-focus-within:text-emerald-500 transition-colors">
-                    <svg class="fill-current h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-                    </svg>
-                </div>
-            </div>
+    <!-- Metrik berat & tinggi -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-icon-row">
+          <div class="metric-icon green">
+            <i class="ti ti-weight"></i>
+          </div>
+          <span class="metric-label">Berat badan</span>
         </div>
+        <div class="metric-input-wrap">
+          <input type="number" step="0.1" placeholder="0.0" class="metric-input">
+          <span class="metric-unit">kg</span>
+        </div>
+      </div>
 
-        <!-- Grid Input Berat & Tinggi -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Berat Badan -->
-            <div class="space-y-2">
-                <label class="text-xs font-black uppercase tracking-widest text-slate-400 ml-1">Berat Badan (kg)</label>
-                <div class="relative">
-                    <input type="number" step="0.1" placeholder="0.0" class="block w-full bg-slate-50 border-2 border-slate-100 text-slate-700 font-extrabold py-4 px-5 rounded-2xl focus:outline-none focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all placeholder:text-slate-300">
-                    <div class="absolute inset-y-0 right-5 flex items-center">
-                        <span class="text-xs font-black text-slate-400 bg-slate-200/50 px-2 py-1 rounded-lg">KG</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Tinggi Badan -->
-            <div class="space-y-2">
-                <label class="text-xs font-black uppercase tracking-widest text-slate-400 ml-1">Tinggi Badan (cm)</label>
-                <div class="relative">
-                    <input type="number" step="0.1" placeholder="0.0" class="block w-full bg-slate-50 border-2 border-slate-100 text-slate-700 font-extrabold py-4 px-5 rounded-2xl focus:outline-none focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all placeholder:text-slate-300">
-                    <div class="absolute inset-y-0 right-5 flex items-center">
-                        <span class="text-xs font-black text-slate-400 bg-slate-200/50 px-2 py-1 rounded-lg">CM</span>
-                    </div>
-                </div>
-            </div>
+      <div class="metric-card">
+        <div class="metric-icon-row">
+          <div class="metric-icon blue">
+            <i class="ti ti-ruler-measure"></i>
+          </div>
+          <span class="metric-label">Tinggi badan</span>
         </div>
-
-        <!-- Button Simpan -->
-        <div class="pt-4">
-            <button type="submit" class="group relative w-full flex justify-center items-center gap-3 bg-emerald-600 hover:bg-emerald-500 text-white py-5 px-6 rounded-2xl font-black text-lg tracking-wide shadow-xl shadow-emerald-200 active:scale-[0.98] transition-all duration-200 overflow-hidden">
-                <span class="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
-                </svg>
-                SIMPAN HASIL PEMERIKSAAN
-            </button>
+        <div class="metric-input-wrap">
+          <input type="number" step="0.1" placeholder="0.0" class="metric-input">
+          <span class="metric-unit">cm</span>
         </div>
-    </form>
-    
-    <!-- Footer info -->
-    <div class="p-6 bg-slate-50 text-center border-t border-slate-100">
-        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest leading-none italic">Pastikan data yang dimasukkan sudah benar sesuai KMS</p>
+      </div>
     </div>
+
+    <!-- Info KMS -->
+    <div class="info-strip">
+      <i class="ti ti-info-circle"></i>
+      <span>Pastikan data sesuai yang tertera di KMS balita</span>
+    </div>
+
+    <!-- Tombol simpan -->
+    <button class="btn-simpan" type="button">
+      <i class="ti ti-device-floppy"></i>
+      Simpan hasil pemeriksaan
+    </button>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="form-footer">
+    <i class="ti ti-lock"></i>
+    <span>Data tersimpan aman &amp; terenkripsi</span>
+  </div>
+
 </div>
+
+</body>
+</html>

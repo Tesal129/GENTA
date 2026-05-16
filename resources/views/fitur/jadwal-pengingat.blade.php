@@ -1,96 +1,190 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Ini yang penting supaya kodenya 'nyala' -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Jadwal Pengingat Kesehatan</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: sans-serif;
+      background: #f5f5f0;
+      color: #1a1a18;
+      padding: 2rem;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .remind-wrap {
+      width: 100%;
+      max-width: 420px;
+      background: #fff;
+      border: 0.5px solid #e2e2dd;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    /* Header */
+    .remind-header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 0.5px solid #e2e2dd;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .header-left { display: flex; align-items: center; gap: 10px; }
+    .header-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: #E1F5EE; display: flex;
+      align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .header-icon i { font-size: 18px; color: #0F6E56; }
+    .header-title { font-size: 15px; font-weight: 600; color: #1a1a18; }
+    .header-sub { font-size: 11px; color: #888780; margin-top: 1px; }
+    .btn-cal {
+      display: flex; align-items: center; gap: 4px;
+      font-size: 12px; color: #0F6E56;
+      background: none; border: none; cursor: pointer; font-family: sans-serif;
+    }
+    .btn-cal i { font-size: 14px; }
+
+    /* List */
+    .remind-list {
+      padding: 1rem 1.25rem;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+
+    .remind-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px; border: 0.5px solid #e2e2dd;
+      border-radius: 12px; background: #f8f8f5;
+    }
+    .remind-item.upcoming { border-color: #5DCAA5; background: #E1F5EE; }
+    .remind-item.done { opacity: 0.6; }
+
+    /* Ikon */
+    .item-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .item-icon.teal { background: #9FE1CB; border: 0.5px solid #5DCAA5; }
+    .item-icon.teal i { font-size: 18px; color: #085041; }
+    .item-icon.green { background: #E1F5EE; border: 0.5px solid #9FE1CB; }
+    .item-icon.green i { font-size: 18px; color: #0F6E56; }
+    .item-icon.neutral { background: #fff; border: 0.5px solid #d3d1c7; }
+    .item-icon.neutral i { font-size: 18px; color: #888780; }
+
+    /* Body */
+    .item-body { flex: 1; }
+    .item-name { font-size: 14px; font-weight: 600; color: #1a1a18; }
+    .item-name.done { text-decoration: line-through; color: #888780; }
+    .item-date {
+      font-size: 11px; color: #888780; margin-top: 2px;
+      display: flex; align-items: center; gap: 4px;
+    }
+    .item-date i { font-size: 12px; }
+
+    /* Kanan */
+    .item-right {
+      display: flex; flex-direction: column;
+      align-items: flex-end; gap: 4px; flex-shrink: 0;
+    }
+    .badge { padding: 3px 8px; border-radius: 99px; font-size: 11px; }
+    .badge.teal { background: #1D9E75; color: #E1F5EE; }
+    .badge.green { background: #E1F5EE; color: #085041; border: 0.5px solid #9FE1CB; }
+    .badge.neutral { background: #f5f5f0; color: #5f5e5a; border: 0.5px solid #d3d1c7; }
+    .countdown {
+      font-size: 11px; color: #0F6E56;
+      display: flex; align-items: center; gap: 3px;
+    }
+    .countdown i { font-size: 12px; }
+
+    /* Footer */
+    .remind-footer {
+      padding: 10px 1.5rem;
+      border-top: 0.5px solid #e2e2dd;
+      background: #f8f8f5;
+      display: flex; align-items: center;
+      justify-content: center; gap: 5px;
+    }
+    .remind-footer i { font-size: 13px; color: #888780; }
+    .remind-footer span { font-size: 11px; color: #888780; }
+  </style>
 </head>
+<body>
 
-<body class="bg-slate-950 p-10 flex justify-center items-center min-h-screen">
-<div class="max-w-md mx-auto bg-slate-900/40 backdrop-blur-xl rounded-[3rem] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.3)] overflow-hidden">
-    <div class="p-8 border-b border-white/5 flex items-center justify-between bg-white/5">
-        <div class="flex items-center gap-4">
-            <div class="relative">
-                <div class="absolute inset-0 bg-emerald-500 blur-lg opacity-40 animate-pulse"></div>
-                <div class="relative p-3 bg-emerald-500/20 rounded-2xl border border-emerald-500/30">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                </div>
-            </div>
-            <div>
-                <h2 class="text-xl font-extrabold text-white tracking-tight">Jadwal Pengingat</h2>
-                <p class="text-[10px] text-slate-400 uppercase tracking-[0.2em] font-medium">Kesehatan Buah Hati</p>
-            </div>
-        </div>
-        <button class="group flex items-center gap-1 text-emerald-400 text-[10px] font-black uppercase tracking-widest hover:text-white transition-all">
-            Kalender 
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
-            </svg>
-        </button>
+<div class="remind-wrap">
+
+  <div class="remind-header">
+    <div class="header-left">
+      <div class="header-icon">
+        <i class="ti ti-clock"></i>
+      </div>
+      <div>
+        <div class="header-title">Jadwal pengingat</div>
+        <div class="header-sub">Kesehatan buah hati</div>
+      </div>
+    </div>
+    <button class="btn-cal">
+      <i class="ti ti-calendar"></i> Kalender
+    </button>
+  </div>
+
+  <div class="remind-list">
+
+    <!-- Mendatang -->
+    <div class="remind-item upcoming">
+      <div class="item-icon teal">
+        <i class="ti ti-vaccine"></i>
+      </div>
+      <div class="item-body">
+        <div class="item-name">Imunisasi Campak</div>
+        <div class="item-date"><i class="ti ti-calendar"></i> 20 Mei 2026</div>
+      </div>
+      <div class="item-right">
+        <span class="badge teal">Mendatang</span>
+        <span class="countdown"><i class="ti ti-hourglass"></i> 5 hari lagi</span>
+      </div>
     </div>
 
-    <div class="p-6 space-y-4">
-        <div class="group relative flex items-center p-5 rounded-[2rem] bg-gradient-to-br from-amber-500/[0.15] to-transparent border border-amber-500/20 hover:border-amber-500/50 hover:translate-x-2 transition-all duration-500 cursor-pointer overflow-hidden">
-            <div class="absolute -right-4 -top-4 w-24 h-24 bg-amber-500/5 rounded-full blur-2xl group-hover:bg-amber-500/10 transition-colors"></div>
-            
-            <div class="relative flex-shrink-0 w-14 h-14 bg-amber-500/20 rounded-[1.2rem] flex items-center justify-center mr-4 shadow-inner">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-amber-500 drop-shadow-[0_0_8px_rgba(245,158,11,0.5)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-            </div>
-            
-            <div class="flex-1 relative">
-                <p class="text-white font-bold text-lg leading-tight tracking-wide">Imunisasi Campak</p>
-                <div class="flex items-center gap-2 mt-1.5">
-                    <div class="p-1 bg-white/5 rounded-md">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-amber-500/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                    </div>
-                    <p class="text-[11px] text-slate-300 font-semibold uppercase tracking-wider">20 Mei 2026</p>
-                </div>
-            </div>
-
-            <div class="relative flex flex-col items-end gap-1.5">
-                <span class="px-3 py-1 bg-amber-500 text-slate-900 rounded-full text-[9px] font-black uppercase tracking-tighter shadow-[0_0_15px_rgba(245,158,11,0.3)]">
-                    Mendatang
-                </span>
-                <div class="flex items-center gap-1">
-                    <span class="relative flex h-2 w-2">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
-                    </span>
-                    <p class="text-[10px] text-amber-500/80 font-bold italic tracking-tight">5 Hari Lagi</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="group flex items-center p-5 rounded-[2rem] bg-white/[0.03] border border-white/5 hover:border-emerald-500/30 hover:bg-emerald-500/[0.05] transition-all duration-500 opacity-60 hover:opacity-100 cursor-default">
-            <div class="flex-shrink-0 w-14 h-14 bg-slate-800/50 rounded-[1.2rem] flex items-center justify-center mr-4 border border-white/5 group-hover:border-emerald-500/20 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-emerald-500/40 group-hover:text-emerald-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-            </div>
-            
-            <div class="flex-1">
-                <p class="text-slate-400 font-bold text-lg leading-tight line-through decoration-emerald-500/30 group-hover:text-white/80 transition-colors">Vitamin A</p>
-                <div class="flex items-center gap-2 mt-1.5">
-                    <p class="text-[11px] text-slate-500 font-medium">Selesai pada 01 Mei</p>
-                </div>
-            </div>
-
-            <span class="px-3 py-1 bg-emerald-500/10 text-emerald-500/50 group-hover:text-emerald-400 border border-emerald-500/10 rounded-full text-[9px] font-black uppercase tracking-widest transition-colors">
-                Verified
-            </span>
-        </div>
+    <!-- Selesai -->
+    <div class="remind-item done">
+      <div class="item-icon green">
+        <i class="ti ti-check"></i>
+      </div>
+      <div class="item-body">
+        <div class="item-name done">Vitamin A</div>
+        <div class="item-date">Selesai pada 01 Mei</div>
+      </div>
+      <div class="item-right">
+        <span class="badge green">Selesai</span>
+      </div>
     </div>
-    
-    <div class="pb-6 text-center">
-        <p class="text-[9px] text-slate-500 font-bold uppercase tracking-[0.3em]">Smart Health Reminder v2.0</p>
+
+    <!-- Terjadwal -->
+    <div class="remind-item">
+      <div class="item-icon neutral">
+        <i class="ti ti-stethoscope"></i>
+      </div>
+      <div class="item-body">
+        <div class="item-name">Pemeriksaan bulanan</div>
+        <div class="item-date"><i class="ti ti-calendar"></i> 01 Juni 2026</div>
+      </div>
+      <div class="item-right">
+        <span class="badge neutral">Terjadwal</span>
+      </div>
     </div>
+
+  </div>
+
+  <div class="remind-footer">
+    <i class="ti ti-bell"></i>
+    <span>Notifikasi aktif untuk semua jadwal</span>
+  </div>
+
 </div>
+
 </body>
 </html>

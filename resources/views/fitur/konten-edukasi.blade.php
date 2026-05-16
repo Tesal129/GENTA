@@ -1,97 +1,202 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Ini yang penting supaya kodenya 'nyala' -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Edukasi Orang Tua</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: sans-serif;
+      background: #f5f5f0;
+      color: #1a1a18;
+      padding: 2rem;
+      min-height: 100vh;
+    }
+
+    .edu-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    /* Header */
+    .edu-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .edu-header-left { display: flex; align-items: center; gap: 12px; }
+    .edu-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: #E1F5EE; display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0;
+    }
+    .edu-icon i { font-size: 20px; color: #0F6E56; }
+    .edu-title { font-size: 18px; font-weight: 600; color: #1a1a18; }
+    .edu-sub { font-size: 12px; color: #888780; margin-top: 2px; }
+    .btn-all {
+      padding: 7px 14px;
+      border: 0.5px solid #d3d1c7;
+      border-radius: 8px;
+      background: #fff;
+      color: #5f5e5a;
+      font-size: 13px;
+      cursor: pointer;
+      font-family: sans-serif;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .btn-all:hover { background: #E1F5EE; color: #0F6E56; border-color: #5DCAA5; }
+
+    /* Card grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .edu-card {
+      background: #fff;
+      border: 0.5px solid #e2e2dd;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.15s;
+    }
+    .edu-card:hover { border-color: #b4b2a9; }
+
+    /* Thumbnail */
+    .card-thumb {
+      height: 140px;
+      background: #E1F5EE;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .card-thumb.blue { background: #E6F1FB; }
+    .card-thumb.amber { background: #FAEEDA; }
+
+    .card-thumb i { font-size: 40px; color: #9FE1CB; }
+    .card-thumb.blue i { color: #B5D4F4; }
+    .card-thumb.amber i { color: #FAC775; }
+
+    /* Tag kategori */
+    .card-tag {
+      position: absolute; top: 10px; left: 10px;
+      padding: 3px 9px; border-radius: 99px; font-size: 11px;
+      background: #fff; border: 0.5px solid #9FE1CB; color: #085041;
+    }
+    .card-tag.blue { border-color: #B5D4F4; color: #0C447C; }
+    .card-tag.amber { border-color: #FAC775; color: #633806; }
+
+    /* Body */
+    .card-body {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 6px;
+    }
+    .card-title { font-size: 14px; font-weight: 600; color: #1a1a18; }
+    .card-desc { font-size: 12px; color: #5f5e5a; line-height: 1.6; flex: 1; }
+
+    /* Footer */
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 10px;
+      border-top: 0.5px solid #e2e2dd;
+      margin-top: 6px;
+    }
+    .card-link {
+      display: flex; align-items: center; gap: 4px;
+      font-size: 12px; color: #0F6E56;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .card-link:hover { color: #085041; }
+    .card-link i { font-size: 14px; }
+    .card-duration {
+      font-size: 11px; color: #888780;
+      display: flex; align-items: center; gap: 3px;
+    }
+    .card-duration i { font-size: 13px; }
+  </style>
 </head>
+<body>
 
-<!-- Section Edukasi - Emerald Health Edition -->
-<div class="p-8 bg-slate-50 rounded-[3rem] border border-white shadow-xl">
-    <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
-        <div class="flex items-center gap-4">
-            <div class="p-3 bg-emerald-500 rounded-2xl shadow-lg shadow-emerald-200">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
-            </div>
-            <div>
-                <h2 class="text-3xl font-black text-slate-800 tracking-tight">Edukasi Orang Tua</h2>
-                <p class="text-emerald-600/70 font-bold text-sm uppercase tracking-widest">Wawasan Tumbuh Kembang</p>
-            </div>
+<div class="edu-wrap">
+
+  <!-- Header -->
+  <div class="edu-header">
+    <div class="edu-header-left">
+      <div class="edu-icon">
+        <i class="ti ti-book-2"></i>
+      </div>
+      <div>
+        <div class="edu-title">Edukasi orang tua</div>
+        <div class="edu-sub">Wawasan tumbuh kembang</div>
+      </div>
+    </div>
+    <button class="btn-all">Lihat semua materi</button>
+  </div>
+
+  <!-- Kartu artikel -->
+  <div class="cards-grid">
+
+    <!-- Nutrisi -->
+    <div class="edu-card">
+      <div class="card-thumb">
+        <i class="ti ti-salad"></i>
+        <span class="card-tag">Nutrisi</span>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Pentingnya MPASI bergizi</div>
+        <div class="card-desc">Panduan memberikan makanan pendamping ASI pertama yang kaya nutrisi untuk si kecil.</div>
+        <div class="card-footer">
+          <a class="card-link" href="#">Baca selengkapnya <i class="ti ti-arrow-right"></i></a>
+          <span class="card-duration"><i class="ti ti-clock"></i> 5 menit</span>
         </div>
-        <button class="px-6 py-3 bg-white border-2 border-emerald-100 rounded-2xl text-sm font-bold text-emerald-600 hover:bg-emerald-500 hover:text-white transition-all shadow-sm active:scale-95">
-            Lihat Semua Materi
-        </button>
+      </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Card Item 1: Nutrisi -->
-        <div class="group bg-white rounded-[2.5rem] overflow-hidden border border-emerald-50 shadow-sm hover:shadow-2xl hover:shadow-emerald-200/50 hover:-translate-y-2 transition-all duration-500">
-            <!-- Thumbnail -->
-            <div class="relative h-48 bg-emerald-100 overflow-hidden">
-                <div class="absolute inset-0 bg-gradient-to-t from-emerald-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                    <span class="text-white text-xs font-bold flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                        </svg>
-                        Putar Video
-                    </span>
-                </div>
-                <!-- Placeholder SVG -->
-                <div class="w-full h-full bg-gradient-to-br from-emerald-50 to-emerald-200 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                    </svg>
-                </div>
-                <!-- Category Tag -->
-                <div class="absolute top-4 left-4">
-                    <span class="px-4 py-1.5 bg-white/90 backdrop-blur-md rounded-full text-[10px] font-black uppercase tracking-widest text-emerald-600 shadow-sm border border-emerald-100">
-                        Nutrisi
-                    </span>
-                </div>
-            </div>
-
-            <!-- Content -->
-            <div class="p-6">
-                <h5 class="text-lg font-extrabold text-slate-800 mb-2 group-hover:text-emerald-600 transition-colors">Pentingnya MPASI Bergizi</h5>
-                <p class="text-sm text-slate-500 leading-relaxed mb-6">Panduan memberikan makanan pendamping ASI pertama yang kaya nutrisi...</p>
-                
-                <div class="flex items-center justify-between pt-4 border-t border-emerald-50">
-                    <a href="#" class="flex items-center gap-2 text-emerald-600 font-black text-xs uppercase tracking-tighter hover:text-emerald-700 transition-colors">
-                        Baca Selengkapnya
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                    </a>
-                    <span class="text-[10px] text-emerald-400 font-bold uppercase">5 Menit</span>
-                </div>
-            </div>
+    <!-- Psikologi -->
+    <div class="edu-card">
+      <div class="card-thumb blue">
+        <i class="ti ti-heart-handshake" style="color:#B5D4F4;"></i>
+        <span class="card-tag blue">Psikologi</span>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Bonding ayah &amp; anak</div>
+        <div class="card-desc">Membangun ikatan emosional yang kuat antara ayah dan si kecil sejak dini.</div>
+        <div class="card-footer">
+          <a class="card-link" href="#">Baca selengkapnya <i class="ti ti-arrow-right"></i></a>
+          <span class="card-duration"><i class="ti ti-clock"></i> 3 menit</span>
         </div>
-
-        <!-- Card Item 2: Psikologi -->
-        <div class="group bg-white rounded-[2.5rem] overflow-hidden border border-emerald-50 shadow-sm hover:shadow-2xl hover:shadow-emerald-200/50 hover:-translate-y-2 transition-all duration-500">
-            <div class="relative h-48 bg-emerald-50 flex items-center justify-center">
-                 <span class="px-4 py-1.5 absolute top-4 left-4 bg-white/90 backdrop-blur-md rounded-full text-[10px] font-black uppercase tracking-widest text-emerald-600 shadow-sm border border-emerald-100">Psikologi</span>
-                 <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-emerald-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                </svg>
-            </div>
-            <div class="p-6">
-                <h5 class="text-lg font-extrabold text-slate-800 mb-2 group-hover:text-emerald-600 transition-colors">Bonding Ayah & Anak</h5>
-                <p class="text-sm text-slate-500 leading-relaxed mb-6">Membangun ikatan emosional yang kuat antara ayah dan si kecil sejak dini.</p>
-                <div class="flex items-center justify-between pt-4 border-t border-emerald-50">
-                    <a href="#" class="flex items-center gap-2 text-emerald-600 font-black text-xs uppercase tracking-tighter hover:text-emerald-700 transition-colors">
-                        Baca Selengkapnya
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                    </a>
-                    <span class="text-[10px] text-emerald-400 font-bold uppercase">3 Menit</span>
-                </div>
-            </div>
-        </div>
-
+      </div>
     </div>
+
+    <!-- Imunisasi (kartu tambahan) -->
+    <div class="edu-card">
+      <div class="card-thumb amber">
+        <i class="ti ti-vaccine" style="color:#FAC775;"></i>
+        <span class="card-tag amber">Imunisasi</span>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Jadwal imunisasi lengkap</div>
+        <div class="card-desc">Kenali jadwal dan jenis vaksin yang wajib diberikan sesuai usia balita.</div>
+        <div class="card-footer">
+          <a class="card-link" href="#">Baca selengkapnya <i class="ti ti-arrow-right"></i></a>
+          <span class="card-duration"><i class="ti ti-clock"></i> 4 menit</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
+
+</body>
+</html>
