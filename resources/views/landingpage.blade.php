@@ -726,7 +726,9 @@
 <!-- ══════ NAVBAR ══════ -->
 <nav id="navbar">
     <a href="/" class="nav-brand">
-        <div class="logo"><i class="bi bi-heart-pulse-fill"></i></div>
+        <div class="logo">
+            <img src="{{ asset('https://img.sanishtech.com/u/84f996c60c30b287ca79b4ac4f94b9f3.png') }}" alt="Logo GENTA" style="width:40px; height:40px; border-radius:8px;">
+        </div>
         <span>GENTA</span>
     </a>
     <div class="nav-links">
