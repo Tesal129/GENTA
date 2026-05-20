@@ -184,7 +184,9 @@
 
     <div class="card-wrap">
         <a href="/" class="brand">
-            <div class="brand-icon"><i class="bi bi-heart-pulse-fill"></i></div>
+            <div class="brand-icon">
+                <img src="{{ asset('https://img.sanishtech.com/u/84f996c60c30b287ca79b4ac4f94b9f3.png') }}" alt="Logo GENTA" style="width:20px; height:20px; border-radius:6px;">
+            </div>
             <span class="brand-name">GENTA</span>
         </a>
 
