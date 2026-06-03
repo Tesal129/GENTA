@@ -446,7 +446,7 @@
 <nav id="navbar">
     <a href="/" class="nav-brand">
         <div class="logo">
-            <img src="{{ asset('https://img.sanishtech.com/u/84f996c60c30b287ca79b4ac4f94b9f3.png') }}" alt="Logo GENTA" style="width:38px; height:38px; border-radius:8px;">
+            <img src="{{ asset('https://www.image2url.com/r2/default/images/1780470981952-c4f72cc3-af32-42ae-9228-d8a982bc998a.png') }}" alt="Logo GENTA" style="width:38px; height:38px; border-radius:8px;">
         </div>
         <span>GENTA</span>
     </a>
@@ -628,7 +628,7 @@
         <div class="footer-brand">
             <div class="logo-row">
                 <div class="logo-icon">
-                    <img src="{{ asset('https://img.sanishtech.com/u/84f996c60c30b287ca79b4ac4f94b9f3.png') }}" alt="Logo GENTA" style="width:40px; height:40px; border-radius:8px;">
+                    <img src="{{ asset('https://www.image2url.com/r2/default/images/1780470981952-c4f72cc3-af32-42ae-9228-d8a982bc998a.png') }}" alt="Logo GENTA" style="width:40px; height:40px; border-radius:8px;">
                 </div>
                 <span class="logo-name">GENTA</span>
             </div>
