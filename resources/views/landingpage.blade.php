@@ -457,8 +457,8 @@
         <a href="#kontak">Kontak</a>
     </div>
     <div class="nav-cta">
-        <a href="/login" class="btn-outline-nav">Masuk</a>
-        <a href="/register" class="btn-solid-nav">Mulai Gratis →</a>
+        <a href="/login" class="btn-outline-nav">Login</a>
+        <a href="/register" class="btn-solid-nav">Yuk Daftar</a>
     </div>
 </nav>
  
@@ -466,18 +466,14 @@
 <section class="hero" id="beranda">
     <div class="hero-grid"></div>
     <div class="hero-content">
-        <div class="hero-pill">
-            <i class="bi bi-shield-check"></i>
-            Platform Kesehatan Balita Terpercaya
-        </div>
         <h1>Langkah Kecil<br>untuk <em>Generasi</em><br><em>Masa Depan</em></h1>
         <p>Catatan medis, jadwal imunisasi, dan grafik perkembangan anak — semua dalam satu platform digital yang aman, mudah, dan selalu siap menemanimu.</p>
         <div class="hero-actions">
             <a href="/register" class="btn-hero-primary">
-                <i class="bi bi-rocket-takeoff"></i> Mulai Sekarang — Gratis
+            Yuk Daftar 
             </a>
             <a href="#fitur" class="btn-hero-ghost">
-                <i class="bi bi-play-circle"></i> Pelajari Fitur →
+            Pelajari Fitur
             </a>
         </div>
         <div class="hero-stats">
@@ -536,7 +532,6 @@
 <!-- ══════ FEATURES ══════ -->
 <section class="section" id="fitur">
     <div class="reveal">
-        <div class="section-label"> Fitur Unggulan</div>
         <h2 class="section-title">Semua yang Kader<br>Butuhkan, Dalam Satu Tempat</h2>
         <p class="section-sub">Dirancang khusus untuk posyandu dan kader kesehatan agar pemantauan tumbuh kembang balita jadi lebih mudah dan akurat.</p>
     </div>
@@ -577,7 +572,6 @@
 <!-- ══════ HOW IT WORKS ══════ -->
 <section class="how-section" id="cara-kerja">
     <div class="reveal">
-        <div class="section-label">✦ Cara Kerja</div>
         <h2 class="section-title">Mulai dalam 4 Langkah Mudah</h2>
         <p class="section-sub">Tidak butuh keahlian teknis. GENTA dirancang agar siapa pun bisa langsung pakai.</p>
     </div>
@@ -604,23 +598,7 @@
         </div>
     </div>
 </section>
- 
-<!-- ══════ CTA ══════ -->
-<section class="cta-section" id="tentang">
-    <div class="reveal">
-        <div class="section-label">Bergabung Sekarang</div>
-        <h2 class="section-title">Siap Mulai Memantau<br>Generasi Sehat Indonesia?</h2>
-        <p class="section-sub">Lebih dari 120 posyandu sudah mempercayai GENTA. Giliran posyandumu.</p>
-        <div class="cta-btns">
-            <a href="/register" class="btn-cta-primary">
-                 Mulai Sekarang — Gratis
-            </a>
-            <a href="/login" class="btn-cta-ghost">
-                <i class="bi bi-box-arrow-in-right"></i> Sudah punya akun? Masuk
-            </a>
-        </div>
-    </div>
-</section>
+
  
 <!-- ══════ FOOTER ══════ -->
 <footer id="kontak">
