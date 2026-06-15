@@ -11,33 +11,18 @@ use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AuthController;
 
-/*
-|--------------------------------------------------------------------------
-| Landing Page (publik)
-|--------------------------------------------------------------------------
-*/
+
 Route::get('/', [LandingController::class, 'index'])->name('landing');
 
-/*
-|--------------------------------------------------------------------------
-| Auth Routes
-|--------------------------------------------------------------------------
-*/
+
 Route::get('/login',    [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login',   [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register',[AuthController::class, 'register']);
 Route::post('/logout',  [AuthController::class, 'logout'])->name('logout');
 
-/*
-|--------------------------------------------------------------------------
-| Routes yang butuh login (auth)
-|--------------------------------------------------------------------------
-*/
-Route::middleware('auth')->group(function () {
 
-    // Dashboard
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::middleware('auth')->group(function () {
 
     // Balita
     Route::resource('balita', BalitaController::class);
@@ -89,3 +74,6 @@ Route::get('/fitur/konten-edukasi', function () {
     return view('fitur.konten-edukasi');
 })->name('fitur.konten-edukasi');
 
+Route::get('/dashboard', [AuthController::class, 'dashboard'])
+    ->middleware('check.session')
+    ->name('dashboard');
