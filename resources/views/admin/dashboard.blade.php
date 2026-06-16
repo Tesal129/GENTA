@@ -486,7 +486,7 @@
 <!-- ══════ SIDEBAR ══════ -->
 <aside class="sidebar" id="sidebar">
     <a href="/" class="sidebar-brand">
-        <div class="brand-icon"><i class="bi bi-heart-pulse-fill"></i></div>
+        <img src="{{ asset('https://www.image2url.com/r2/default/images/1780470981952-c4f72cc3-af32-42ae-9228-d8a982bc998a.png') }}" alt="Logo GENTA" style="width:40px; height:40px; border-radius:8px;">
         <span>GENTA</span>
     </a>
 

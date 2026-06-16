@@ -23,6 +23,9 @@ Route::post('/logout',  [AuthController::class, 'logout'])->name('logout');
 
 
 Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
+    
+    // ... route lain yang udah ada
 
     // Balita
     Route::resource('balita', BalitaController::class);
@@ -73,7 +76,3 @@ Route::get('/fitur/laporan-statistik', function () {
 Route::get('/fitur/konten-edukasi', function () {
     return view('fitur.konten-edukasi');
 })->name('fitur.konten-edukasi');
-
-Route::get('/dashboard', [AuthController::class, 'dashboard'])
-    ->middleware('check.session')
-    ->name('dashboard');

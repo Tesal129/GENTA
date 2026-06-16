@@ -26,6 +26,7 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    
     // Login pakai username, bukan email
     public function getAuthIdentifierName()
     {

@@ -11,14 +11,14 @@ class AuthController extends Controller
 {
     // ── Tampilkan form login ──────────────────────────────────────────────
     public function showLogin()
-    {
-        // Kalau sudah login, langsung ke dashboard
-        if (Auth::check()) {
-            return redirect()->route('dashboard');
-        }
-
-        return view('auth.login');
-    }
+{
+    // HAPUS ini:
+    // if (Auth::check()) {
+    //     return redirect()->route('dashboard');
+    // }
+    
+    return view('auth.login');
+}
 
     // ── Proses login ──────────────────────────────────────────────────────
     public function login(Request $request)
@@ -50,13 +50,14 @@ class AuthController extends Controller
 
     // ── Tampilkan form register ───────────────────────────────────────────
     public function showRegister()
-    {
-        if (Auth::check()) {
-            return redirect()->route('dashboard');
-        }
-
-        return view('auth.register');
-    }
+{
+    // HAPUS ini juga:
+    // if (Auth::check()) {
+    //     return redirect()->route('dashboard');
+    // }
+    
+    return view('auth.register');
+}
 
     // ── Proses register ───────────────────────────────────────────────────
     public function register(Request $request)
@@ -96,4 +97,8 @@ class AuthController extends Controller
         return redirect()->route('landing')
                          ->with('success', 'Kamu berhasil keluar.');
     }
+    public function dashboard()
+{
+    return view('admin.dashboard');
+}
 }

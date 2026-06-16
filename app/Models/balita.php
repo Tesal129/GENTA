@@ -2,40 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Balita extends Model
 {
-    use HasFactory;
+    protected $table      = 'balita';
+    protected $primaryKey = 'id_balita';
+    public    $timestamps = false;
 
     protected $fillable = [
+        'nik_balita',
         'nama_balita',
-        'nama_ortu',
-        'jenis_kelamin',
         'tanggal_lahir',
+        'jenis_kelamin',
+        'nama_ibu',
+        'nama_ayah',
         'alamat',
-        'status_gizi',
     ];
-
-    protected $casts = [
-        'tanggal_lahir' => 'date',
-    ];
-
-    /**
-     * Semua data pemeriksaan balita ini.
-     */
-    public function pemeriksaans()
-    {
-        return $this->hasMany(Pemeriksaan::class);
-    }
-
-    /**
-     * Pemeriksaan terakhir (dipakai di tabel dashboard).
-     */
-    public function latestPemeriksaan()
-    {
-        return $this->hasOne(Pemeriksaan::class)
-                    ->latestOfMany('tanggal_periksa');
-    }
 }
