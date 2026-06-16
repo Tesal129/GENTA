@@ -8,16 +8,28 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <style>
         :root {
-            --g-dark:      #071A13;
-            --g-dark2:     #0D2B1E;
-            --g-green:     #1D9E75;
-            --g-green-mid: #25C491;
-            --g-green-lite:#4EEDB5;
-            --g-white:     #F0FBF5;
-            --g-white2:    #C8EAD9;
-            --g-muted:     #5A8A72;
+            --g-bg:           #F7FBFF;
+            --g-bg2:          #EEF9F4;
+            --g-green:        #0E9E72;
+            --g-green-mid:    #12BC88;
+            --g-green-lite:   #E6F7F1;
+            --g-green-border: rgba(14,158,114,.18);
+            --g-blue:         #1565C0;
+            --g-blue-mid:     #1976D2;
+            --g-dark:         #0A1628;
+            --g-dark2:        #102240;
+            --g-text:         #1A2E3B;
+            --g-text2:        #3D5A6C;
+            --g-muted:        #7A9BB0;
+            --g-border:       rgba(21,101,192,.1);
+            --g-white:        #FFFFFF;
+            --g-error:        #E05C5C;
         }
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        *, *::before, *::after { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+        }
 
         body {
             font-family: 'DM Sans', sans-serif;
@@ -34,8 +46,10 @@
         body::before {
             content: '';
             position: fixed;
-            top: -20%; right: -10%;
-            width: 60vw; height: 70vh;
+            top: -20%; 
+            right: -10%;
+            width: 60vw; 
+            height: 70vh;
             background: radial-gradient(ellipse, rgba(29,158,117,.13) 0%, transparent 70%);
             pointer-events: none;
         }
@@ -55,8 +69,12 @@
             animation: fadeUp .6s ease forwards;
         }
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to   { opacity: 1; transform: translateY(0); }
+            from { 
+                opacity: 0; 
+                transform: translateY(20px); }
+            to   { 
+                opacity: 1; 
+                transform: translateY(0); }
         }
 
         .brand {
@@ -71,10 +89,20 @@
             width: 40px; height: 40px;
             background: var(--g-green);
             border-radius: 11px;
-            display: flex; align-items: center; justify-content: center;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
         }
-        .brand-icon i { color: #fff; font-size: 19px; }
-        .brand-name { font-family: 'Sora', sans-serif; font-size: 22px; font-weight: 800; color: var(--g-white); }
+        .brand-icon i { 
+            color: #fff; 
+            font-size: 19px; 
+        }
+        .brand-name { 
+            font-family: 'Sora', sans-serif; 
+            font-size: 22px; 
+            font-weight: 800; 
+            color: var(--g-white); 
+        }
 
         .auth-card {
             background: var(--g-dark2);
@@ -90,9 +118,15 @@
             letter-spacing: -.02em;
             margin-bottom: 6px;
         }
-        .auth-card .subtitle { font-size: 14px; color: var(--g-muted); margin-bottom: 26px; }
+        .auth-card .subtitle { 
+            font-size: 14px; 
+            color: var(--g-muted); 
+            margin-bottom: 26px; 
+        }
 
-        .form-group { margin-bottom: 16px; }
+        .form-group { 
+            margin-bottom: 16px; 
+        }
         .form-group label {
             display: block;
             font-size: 13px;
@@ -100,7 +134,9 @@
             color: var(--g-white2);
             margin-bottom: 7px;
         }
-        .input-wrap { position: relative; }
+        .input-wrap { 
+            position: relative; 
+        }
         .input-wrap i {
             position: absolute;
             left: 13px; top: 50%;
@@ -120,9 +156,16 @@
             outline: none;
             transition: border-color .2s, background .2s;
         }
-        .form-control::placeholder { color: var(--g-muted); }
-        .form-control:focus { border-color: rgba(78,237,181,.45); background: rgba(255,255,255,.06); }
-        .form-control.is-invalid { border-color: rgba(224,92,92,.5); }
+        .form-control::placeholder { 
+            color: var(--g-muted); 
+        }
+        .form-control:focus { 
+            border-color: rgba(78,237,181,.45); 
+            background: rgba(255,255,255,.06); 
+        }
+        .form-control.is-invalid { 
+            border-color: rgba(224,92,92,.5); 
+        }
 
         .invalid-feedback {
             font-size: 12px;
@@ -133,7 +176,10 @@
             gap: 4px;
         }
 
-        .hint { font-size: 11.5px; color: var(--g-muted); margin-top: 5px; }
+        .hint { 
+            font-size: 11.5px; 
+            color: var(--g-muted); 
+            margin-top: 5px; }
 
         .btn-submit {
             width: 100%;
@@ -154,7 +200,11 @@
             justify-content: center;
             gap: 8px;
         }
-        .btn-submit:hover { background: var(--g-green-mid); transform: translateY(-1px); box-shadow: 0 12px 36px rgba(29,158,117,.45); }
+        .btn-submit:hover { 
+            background: var(--g-green-mid); 
+            transform: translateY(-1px); 
+            box-shadow: 0 12px 36px rgba(29,158,117,.45); 
+        }
 
         .login-link {
             text-align: center;
@@ -162,8 +212,14 @@
             color: var(--g-muted);
             margin-top: 20px;
         }
-        .login-link a { color: var(--g-green-lite); font-weight: 600; text-decoration: none; }
-        .login-link a:hover { text-decoration: underline; }
+        .login-link a { 
+            color: var(--g-green-lite); 
+            font-weight: 600; 
+            text-decoration: none; 
+        }
+        .login-link a:hover { 
+            text-decoration: underline; 
+        }
 
         .back-link {
             display: flex;
@@ -176,7 +232,8 @@
             text-decoration: none;
             transition: color .2s;
         }
-        .back-link:hover { color: var(--g-green-lite); }
+        .back-link:hover { 
+            color: var(--g-green-lite); }
     </style>
 </head>
 <body>
@@ -185,13 +242,13 @@
     <div class="card-wrap">
         <a href="/" class="brand">
             <div class="brand-icon">
-                <img src="{{ asset('https://img.sanishtech.com/u/84f996c60c30b287ca79b4ac4f94b9f3.png') }}" alt="Logo GENTA" style="width:20px; height:20px; border-radius:6px;">
+                <img src="{{ asset('https://www.image2url.com/r2/default/images/1780470981952-c4f72cc3-af32-42ae-9228-d8a982bc998a.png') }}" alt="Logo GENTA" style="width:40px; height:40px; border-radius:8px;">
             </div>
             <span class="brand-name">GENTA</span>
         </a>
 
         <div class="auth-card">
-            <h1>Buat Akun Kader ✨</h1>
+            <h1>Daftarkan Balita Kesayanganmu</h1>
             <p class="subtitle">Daftar gratis dan mulai pantau tumbuh kembang balita.</p>
 
             <form method="POST" action="/register">
@@ -274,17 +331,17 @@
                 </div>
 
                 <button type="submit" class="btn-submit">
-                    <i class="bi bi-rocket-takeoff"></i> Buat Akun — Gratis
+                    Daftar
                 </button>
             </form>
 
             <div class="login-link">
-                Sudah punya akun? <a href="/login">Masuk di sini →</a>
+                Sudah punya akun? <a href="/login">Masuk di sini</a>
             </div>
         </div>
 
         <a href="/" class="back-link">
-            <i class="bi bi-arrow-left"></i> Kembali ke beranda
+         Kembali ke beranda
         </a>
     </div>
 </body>
