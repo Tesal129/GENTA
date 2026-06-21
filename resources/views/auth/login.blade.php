@@ -412,10 +412,14 @@
 
             <div class="divider">atau</div>
 
-            <div class="register-link">
-                Belum punya akun? <a href="#">Daftar sekarang →</a>
+                <div class="register-link">
+                    Belum punya akun? <a href="{{ route('register') }}">Daftar balita di sini →</a>
             </div>
-        </div>
+            <div style="text-align:center;margin-top:10px">
+                <a href="{{ route('register.kader') }}" style="font-size:12px;color:var(--g-muted);text-decoration:none">
+                    Kader baru? Buat akun di sini
+        </a>
+    </div>
 
         <a href="/" class="back-link">
             <i class="bi bi-arrow-left"></i> Kembali ke beranda

@@ -17,6 +17,7 @@ class Balita extends Model
         'jenis_kelamin',
         'nama_ibu',
         'nama_ayah',
+        'no_hp_ortu',
         'alamat',
     ];
 }

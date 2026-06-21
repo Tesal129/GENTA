@@ -10,22 +10,28 @@ use App\Http\Controllers\EdukasiController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PublicRegisterController;
 
 
 Route::get('/', [LandingController::class, 'index'])->name('landing');
 
 
-Route::get('/login',    [AuthController::class, 'showLogin'])->name('login');
-Route::post('/login',   [AuthController::class, 'login']);
-Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
-Route::post('/register',[AuthController::class, 'register']);
-Route::post('/logout',  [AuthController::class, 'logout'])->name('logout');
+// ── Login & Logout ──────────────────────────────────────────────
+Route::get('/login',  [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// ── Register Balita (publik, tanpa akun) ────────────────────────
+Route::get('/register',  [PublicRegisterController::class, 'show'])->name('register');
+Route::post('/register', [PublicRegisterController::class, 'store'])->name('register.store');
+
+// ── Register Kader (bikin akun login) ───────────────────────────
+Route::get('/register-kader',  [AuthController::class, 'showRegisterKader'])->name('register.kader');
+Route::post('/register-kader', [AuthController::class, 'registerKader'])->name('register.kader.store');
 
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
-    
-    // ... route lain yang udah ada
 
     // Balita
     Route::resource('balita', BalitaController::class);
@@ -50,8 +56,8 @@ Route::middleware('auth')->group(function () {
     // Profil
     Route::get('/profile',        [ProfileController::class, 'show'])->name('profile.show');
     Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
-
 });
+
 
 Route::get('/fitur/data-balita', function () {
     return view('fitur.data-balita');

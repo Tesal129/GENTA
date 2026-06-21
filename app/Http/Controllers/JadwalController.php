@@ -2,64 +2,76 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Jadwal;
 
 class JadwalController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $jadwals = Jadwal::with('user')->orderBy('tanggal', 'asc')->paginate(10);
+        return view('jadwal.index', compact('jadwals'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('jadwal.form');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_kegiatan' => 'required|string|max:100',
+            'tanggal'       => 'required|date',
+            'lokasi'        => 'nullable|string|max:150',
+            'tipe_kegiatan' => 'required|in:posyandu,imunisasi,penyuluhan',
+            'keterangan'    => 'nullable|string',
+        ], [
+            'nama_kegiatan.required' => 'Nama kegiatan wajib diisi.',
+            'tanggal.required'       => 'Tanggal wajib diisi.',
+            'tipe_kegiatan.required' => 'Tipe kegiatan wajib dipilih.',
+        ]);
+
+        Jadwal::create([
+            'nama_kegiatan' => $request->nama_kegiatan,
+            'tanggal'       => $request->tanggal,
+            'lokasi'        => $request->lokasi,
+            'tipe_kegiatan' => $request->tipe_kegiatan,
+            'keterangan'    => $request->keterangan,
+            'user_id_user'  => auth()->user()->id_user,
+        ]);
+
+        return redirect()->route('jadwal.index')->with('success', 'Jadwal kegiatan berhasil ditambahkan.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit($id)
     {
-        //
+        $jadwal = Jadwal::findOrFail($id);
+        return view('jadwal.form', compact('jadwal'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $jadwal = Jadwal::findOrFail($id);
+
+        $request->validate([
+            'nama_kegiatan' => 'required|string|max:100',
+            'tanggal'       => 'required|date',
+            'lokasi'        => 'nullable|string|max:150',
+            'tipe_kegiatan' => 'required|in:posyandu,imunisasi,penyuluhan',
+            'keterangan'    => 'nullable|string',
+        ]);
+
+        $jadwal->update($request->only([
+            'nama_kegiatan', 'tanggal', 'lokasi', 'tipe_kegiatan', 'keterangan',
+        ]));
+
+        return redirect()->route('jadwal.index')->with('success', 'Jadwal kegiatan berhasil diperbarui.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        Jadwal::findOrFail($id)->delete();
+        return redirect()->route('jadwal.index')->with('success', 'Jadwal kegiatan berhasil dihapus.');
     }
 }

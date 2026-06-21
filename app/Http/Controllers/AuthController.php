@@ -11,14 +11,9 @@ class AuthController extends Controller
 {
     // ── Tampilkan form login ──────────────────────────────────────────────
     public function showLogin()
-{
-    // HAPUS ini:
-    // if (Auth::check()) {
-    //     return redirect()->route('dashboard');
-    // }
-    
-    return view('auth.login');
-}
+    {
+        return view('auth.login');
+    }
 
     // ── Proses login ──────────────────────────────────────────────────────
     public function login(Request $request)
@@ -31,7 +26,6 @@ class AuthController extends Controller
             'password.required' => 'Password wajib diisi.',
         ]);
 
-        // Coba login pakai username
         $credentials = [
             'username' => $request->username,
             'password' => $request->password,
@@ -48,23 +42,18 @@ class AuthController extends Controller
             ->withErrors(['username' => 'Username atau password salah.']);
     }
 
-    // ── Tampilkan form register ───────────────────────────────────────────
-    public function showRegister()
-{
-    // HAPUS ini juga:
-    // if (Auth::check()) {
-    //     return redirect()->route('dashboard');
-    // }
-    
-    return view('auth.register');
-}
+    // ── Tampilkan form register kader ───────────────────────────────────────
+    public function showRegisterKader()
+    {
+        return view('auth.register-kader');
+    }
 
-    // ── Proses register ───────────────────────────────────────────────────
-    public function register(Request $request)
+    // ── Proses register kader ───────────────────────────────────────────────
+    public function registerKader(Request $request)
     {
         $request->validate([
             'nama_kader' => 'required|string|max:100',
-            'username'   => 'required|string|max:50|unique:users,username',
+            'username'   => 'required|string|max:50|unique:user,username',
             'password'   => 'required|string|min:6|confirmed',
         ], [
             'nama_kader.required' => 'Nama kader wajib diisi.',
@@ -79,6 +68,7 @@ class AuthController extends Controller
             'nama_kader' => $request->nama_kader,
             'username'   => $request->username,
             'password'   => Hash::make($request->password),
+            'role'       => 'kader',
         ]);
 
         Auth::login($user);
@@ -97,8 +87,10 @@ class AuthController extends Controller
         return redirect()->route('landing')
                          ->with('success', 'Kamu berhasil keluar.');
     }
+
+    // ── Dashboard ────────────────────────────────────────────────────────
     public function dashboard()
-{
-    return view('admin.dashboard');
-}
+    {
+        return view('admin.dashboard');
+    }
 }

@@ -2,21 +2,25 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Jadwal extends Model
 {
-    use HasFactory;
+    protected $table      = 'jadwal';
+    protected $primaryKey = 'id_jadwal';
+    public    $timestamps = false;
 
     protected $fillable = [
         'nama_kegiatan',
         'tanggal',
         'lokasi',
         'keterangan',
+        'tipe_kegiatan',
+        'user_id_user',
     ];
 
-    protected $casts = [
-        'tanggal' => 'date',
-    ];
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id_user', 'id_user');
+    }
 }

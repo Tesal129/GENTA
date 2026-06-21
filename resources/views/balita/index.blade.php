@@ -549,7 +549,13 @@
 
 <!-- ══════ MAIN ══════ -->
 <div class="main">
+
     <!-- TOPBAR -->
+    <div class="topbar">
+        <div class="topbar-left">
+            <h1>Data Balita</h1>
+            <p>Kelola data seluruh balita yang terdaftar</p>
+        </div>
         <a href="{{ route('balita.create') }}" class="btn-primary">
             <i class="bi bi-plus-lg"></i> Tambah Balita
         </a>
