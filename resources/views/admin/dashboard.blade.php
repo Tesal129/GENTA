@@ -508,16 +508,6 @@
     </div>
 
     <div class="sidebar-section">
-        <div class="sidebar-section-label">Laporan</div>
-        <a href="/laporan" class="nav-item">
-            <i class="bi bi-bar-chart-line"></i> Statistik & Laporan
-        </a>
-        <a href="/edukasi" class="nav-item">
-            <i class="bi bi-book"></i> Konten Edukasi
-        </a>
-    </div>
-
-    <div class="sidebar-section">
         <div class="sidebar-section-label">Sistem</div>
         <a href="/kelola-user" class="nav-item">
             <i class="bi bi-people"></i> Kelola Kader

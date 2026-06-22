@@ -427,21 +427,6 @@
             <a href="/register" class="btn-hero-primary">Yuk Daftar</a>
             <a href="#fitur" class="btn-hero-ghost">Lihat Fitur</a>
         </div>
-        <div class="hero-stats">
-            <div class="hero-stat-item">
-                <div class="num">2.400+</div>
-                <div class="lbl">Balita Terdaftar</div>
-            </div>
-            <div class="hero-stat-item">
-                <div class="num">120+</div>
-                <div class="lbl">Posyandu Aktif</div>
-            </div>
-            <div class="hero-stat-item">
-                <div class="num">98%</div>
-                <div class="lbl">Kepuasan Kader</div>
-            </div>
-        </div>
-    </div>
 </section>
 
 <!-- ══════ STATS BAR ══════ -->
@@ -479,16 +464,6 @@
             <h3>Pemeriksaan Digital</h3>
             <p>Catat hasil penimbangan dan pengukuran langsung dari smartphone. Status gizi dihitung otomatis berdasarkan data yang dimasukkan.</p>
         </a>
-        <a href="{{ route('fitur.laporan-statistik') }}" class="feat-card reveal">
-            <div class="feat-icon"><i class="bi bi-bar-chart-line"></i></div>
-            <h3>Laporan & Statistik</h3>
-            <p>Generate laporan bulanan dan tahunan dalam hitungan detik. Ekspor data untuk keperluan pelaporan ke puskesmas atau dinas kesehatan.</p>
-        </a>
-        <a href="{{ route('fitur.konten-edukasi') }}" class="feat-card reveal">
-            <div class="feat-icon"><i class="bi bi-book"></i></div>
-            <h3>Konten Edukasi</h3>
-            <p>Akses artikel, panduan gizi, dan materi penyuluhan yang dikurasi oleh tenaga kesehatan profesional untuk dibagikan ke orang tua balita.</p>
-        </a>
     </div>
 </section>
 
@@ -501,13 +476,13 @@
     <div class="steps-row">
         <div class="step-item reveal">
             <div class="step-num">1</div>
-            <h4>Daftar Akun</h4>
-            <p>Buat akun kader gratis dalam 2 menit. Tidak perlu kartu kredit atau biaya apapun.</p>
+            <h4>Input Data Balita</h4>
+            <p>Masukkan data balitamu melalui fitur Yuk Daftar yang ada di atas.</p>
         </div>
         <div class="step-item reveal">
             <div class="step-num">2</div>
-            <h4>Input Data Balita</h4>
-            <p>Masukkan data balita di wilayah posyandu kamu. Import dari Excel juga tersedia.</p>
+            <h4>Proses Pemeriksaan</h4>
+            <p>Selanjutnya akan dilakukan pemeriksaan lanjutan oleh dokter berpengalaman.</p>
         </div>
         <div class="step-item reveal">
             <div class="step-num">3</div>
@@ -517,7 +492,7 @@
         <div class="step-item reveal">
             <div class="step-num">4</div>
             <h4>Pantau & Laporkan</h4>
-            <p>Pantau perkembangan semua balita sekaligus dan buat laporan kapan saja.</p>
+            <p>Cs akan menghubungimu melalui whatsaap setiap kamu melakukan pemeriksaan berkala.</p>
         </div>
     </div>
 </section>
@@ -538,27 +513,23 @@
             <h5>Produk</h5>
             <a href="#fitur">Fitur</a>
             <a href="#cara-kerja">Cara Kerja</a>
-            <a href="#">Harga</a>
-            <a href="#">Update Terbaru</a>
         </div>
         <div class="footer-col">
             <h5>Sumber Daya</h5>
-            <a href="#">Dokumentasi</a>
             <a href="#">Panduan Kader</a>
-            <a href="#">Artikel Gizi</a>
             <a href="#">FAQ</a>
         </div>
         <div class="footer-col">
             <h5>Kontak</h5>
             <a href="mailto:genta@gmail.com">genta@gmail.com</a>
-            <a href="https://wa.me/6283836305843">WhatsApp Support</a>
+            <a href="https://wa.me/6283836305843">Cutomer Servis GENTA</a>
             <a href="#">Instagram</a>
             <a href="#">Facebook</a>
         </div>
     </div>
     <div class="footer-bottom">
         <span>© 2026 GENTA – Generasi Sehat Kita.</span>
-        <span>Dibuat dengan <i class="bi bi-heart-fill" style="color:var(--g-green);font-size:11px;"></i> untuk kesehatan anak Indonesia</span>
+        <span>Dibuat dengan hati untuk kesehatan anak Indonesia</span>
     </div>
 </footer>
 
