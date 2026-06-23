@@ -538,13 +538,10 @@
     <div class="topbar">
         <div class="topbar-left">
             <h1>Dashboard Admin</h1>
-            <p>Selamat datang kembali, Admin GENTA 👋</p>
+            <p>Halo Admin</p>
         </div>
         <div class="topbar-right">
             <span class="topbar-date"><i class="bi bi-calendar3"></i> {{ now()->translatedFormat('d F Y') }}</span>
-            <a href="/balita/tambah" class="btn-primary">
-                <i class="bi bi-plus-lg"></i> Tambah Balita
-            </a>
         </div>
     </div>
 
