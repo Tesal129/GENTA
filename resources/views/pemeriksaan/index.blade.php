@@ -160,7 +160,6 @@
             <div class="empty-state">
                 <i class="bi bi-clipboard2-pulse"></i>
                 <p>Belum ada data pemeriksaan.</p>
-                <a href="{{ route('pemeriksaan.create') }}" class="btn-primary"><i class="bi bi-plus-lg"></i> Tambah Pemeriksaan</a>
             </div>
             @endif
         </div>

@@ -173,7 +173,6 @@
         <div class="empty-state">
             <i class="bi bi-calendar3"></i>
             <p>Belum ada jadwal kegiatan.</p>
-            <a href="{{ route('jadwal.create') }}" class="btn-primary"><i class="bi bi-plus-lg"></i> Tambah Jadwal</a>
         </div>
         @endif
     </div>
