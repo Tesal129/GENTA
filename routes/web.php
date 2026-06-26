@@ -11,6 +11,7 @@ use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PublicRegisterController;
+use App\Http\Controllers\KaderController;
 
 
 Route::get('/', [LandingController::class, 'index'])->name('landing');
@@ -53,9 +54,14 @@ Route::middleware('auth')->group(function () {
     // Laporan
     Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
 
-    // Profil
-    Route::get('/profile',        [ProfileController::class, 'show'])->name('profile.show');
-    Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    // Kelola Kader
+    Route::get('/kelola-user', [KaderController::class, 'index'])->name('kader.index');
+    Route::post('/kelola-user', [KaderController::class, 'store'])->name('kader.store');
+    Route::delete('/kelola-user/{id}', [KaderController::class, 'destroy'])->name('kader.destroy');
+
+    // Pengaturan
+    Route::get('/pengaturan', [ProfileController::class, 'show'])->name('pengaturan.index');
+    Route::put('/pengaturan', [ProfileController::class, 'update'])->name('pengaturan.update');
 });
 
 

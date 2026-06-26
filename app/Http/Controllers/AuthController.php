@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Balita;
+use App\Models\Jadwal;
+use App\Models\Pemeriksaan;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -91,6 +95,46 @@ class AuthController extends Controller
     // ── Dashboard ────────────────────────────────────────────────────────
     public function dashboard()
     {
-        return view('admin.dashboard');
+        $totalBalita = Balita::count();
+
+        $totalPemeriksaan = Pemeriksaan::whereMonth('tanggal_periksa', now()->month)
+            ->whereYear('tanggal_periksa', now()->year)
+            ->count();
+
+        $jadwalBulanIni = Jadwal::whereMonth('tanggal', now()->month)
+            ->whereYear('tanggal', now()->year)
+            ->count();
+
+        $balitaStunting = Pemeriksaan::whereIn('status_gizi', ['stunting', 'gizi_buruk'])
+            ->select('Balita_id_balita')
+            ->distinct()
+            ->get()
+            ->count();
+
+        $balitaTerbaru = Balita::orderByDesc('id_balita')
+            ->limit(5)
+            ->get()
+            ->map(function (Balita $balita) {
+                $balita->umur_bulan = (int) Carbon::parse($balita->tanggal_lahir)->diffInMonths(now());
+                $balita->status_gizi_terakhir = Pemeriksaan::where('Balita_id_balita', $balita->id_balita)
+                    ->orderByDesc('tanggal_periksa')
+                    ->value('status_gizi');
+
+                return $balita;
+            });
+
+        $jadwalMendatang = Jadwal::where('tanggal', '>=', now()->toDateString())
+            ->orderBy('tanggal')
+            ->limit(5)
+            ->get();
+
+        return view('admin.dashboard', compact(
+            'totalBalita',
+            'totalPemeriksaan',
+            'jadwalBulanIni',
+            'balitaStunting',
+            'balitaTerbaru',
+            'jadwalMendatang'
+        ));
     }
 }

@@ -104,7 +104,7 @@
     </div>
     <div class="sidebar-section">
         <div class="sidebar-section-label">Sistem</div>
-        <a href="/kelola-kader" class="nav-item"><i class="bi bi-people"></i> Kelola Kader</a>
+        <a href="{{ route('kader.index') }}" class="nav-item"><i class="bi bi-people"></i> Kelola Kader</a>
         <a href="/pengaturan" class="nav-item"><i class="bi bi-gear"></i> Pengaturan</a>
     </div>
     <div class="sidebar-footer">

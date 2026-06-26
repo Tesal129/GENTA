@@ -393,6 +393,7 @@
         .badge-stunting { background: rgba(245,158,11,.1); color: #D97706; }
         .badge-buruk   { background: rgba(239,68,68,.08);  color: #EF4444; }
         .badge-obesitas { background: rgba(99,102,241,.1); color: #6366F1; }
+        .badge-none    { background: rgba(122,155,176,.12); color: var(--g-muted); }
 
         /* ══════════════ JADWAL LIST ══════════════ */
         .jadwal-list { padding: 8px 0; }
@@ -483,53 +484,7 @@
 </head>
 <body>
 
-<!-- ══════ SIDEBAR ══════ -->
-<aside class="sidebar" id="sidebar">
-    <a href="/" class="sidebar-brand">
-        <img src="{{ asset('https://www.image2url.com/r2/default/images/1780470981952-c4f72cc3-af32-42ae-9228-d8a982bc998a.png') }}" alt="Logo GENTA" style="width:40px; height:40px; border-radius:8px;">
-        <span>GENTA</span>
-    </a>
-
-    <div class="sidebar-section">
-        <div class="sidebar-section-label">Menu Utama</div>
-        <a href="/dashboard" class="nav-item active">
-            <i class="bi bi-grid-1x2-fill"></i> Dashboard
-        </a>
-        <a href="/balita" class="nav-item">
-            <i class="bi bi-person-heart"></i> Data Balita
-            <span class="nav-badge">247</span>
-        </a>
-        <a href="/pemeriksaan" class="nav-item">
-            <i class="bi bi-clipboard2-pulse"></i> Pemeriksaan
-        </a>
-        <a href="/jadwal" class="nav-item">
-            <i class="bi bi-calendar3"></i> Jadwal Kegiatan
-        </a>
-    </div>
-
-    <div class="sidebar-section">
-        <div class="sidebar-section-label">Sistem</div>
-        <a href="/kelola-user" class="nav-item">
-            <i class="bi bi-people"></i> Kelola Kader
-        </a>
-        <a href="/pengaturan" class="nav-item">
-            <i class="bi bi-gear"></i> Pengaturan
-        </a>
-    </div>
-
-    <div class="sidebar-footer">
-        <div class="user-card">
-            <div class="user-avatar">A</div>
-            <div class="user-info">
-                <div class="user-name">Admin GENTA</div>
-                <div class="user-role">Administrator</div>
-            </div>
-            <a href="/logout" class="logout-btn" title="Keluar">
-                <i class="bi bi-box-arrow-right"></i>
-            </a>
-        </div>
-    </div>
-</aside>
+@include('partials.admin-sidebar', ['active' => 'dashboard'])
 
 <!-- ══════ MAIN ══════ -->
 <div class="main">
@@ -538,7 +493,7 @@
     <div class="topbar">
         <div class="topbar-left">
             <h1>Dashboard Admin</h1>
-            <p>Halo Admin</p>
+            <p>Halo, {{ Auth::user()->nama_kader }}</p>
         </div>
         <div class="topbar-right">
             <span class="topbar-date"><i class="bi bi-calendar3"></i> {{ now()->translatedFormat('d F Y') }}</span>
@@ -552,27 +507,23 @@
         <div class="stats-grid">
             <div class="stat-card green">
                 <div class="stat-icon"><i class="bi bi-person-heart"></i></div>
-                <div class="stat-num">{{ $totalBalita ?? '247' }}</div>
+                <div class="stat-num">{{ $totalBalita }}</div>
                 <div class="stat-label">Total Balita Terdaftar</div>
-                <div class="stat-trend up"><i class="bi bi-arrow-up"></i> +12 bulan ini</div>
             </div>
             <div class="stat-card blue">
                 <div class="stat-icon"><i class="bi bi-clipboard2-pulse"></i></div>
-                <div class="stat-num">{{ $totalPemeriksaan ?? '89' }}</div>
+                <div class="stat-num">{{ $totalPemeriksaan }}</div>
                 <div class="stat-label">Pemeriksaan Bulan Ini</div>
-                <div class="stat-trend up"><i class="bi bi-arrow-up"></i> +5 dari bulan lalu</div>
             </div>
             <div class="stat-card teal">
                 <div class="stat-icon"><i class="bi bi-calendar-check"></i></div>
-                <div class="stat-num">{{ $jadwalBulanIni ?? '6' }}</div>
+                <div class="stat-num">{{ $jadwalBulanIni }}</div>
                 <div class="stat-label">Kegiatan Bulan Ini</div>
-                <div class="stat-trend up"><i class="bi bi-arrow-up"></i> 2 minggu ini</div>
             </div>
             <div class="stat-card indigo">
                 <div class="stat-icon"><i class="bi bi-exclamation-triangle"></i></div>
-                <div class="stat-num">{{ $balitaStunting ?? '14' }}</div>
+                <div class="stat-num">{{ $balitaStunting }}</div>
                 <div class="stat-label">Balita Perlu Perhatian</div>
-                <div class="stat-trend down"><i class="bi bi-arrow-down"></i> -2 dari bulan lalu</div>
             </div>
         </div>
 
@@ -597,46 +548,35 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @forelse($balitaTerbaru as $balita)
+                        @php
+                            $status = $balita->status_gizi_terakhir;
+                            if ($status) {
+                                $badgeClass = match($status) {
+                                    'stunting' => 'badge-stunting',
+                                    'gizi_buruk' => 'badge-buruk',
+                                    'obesitas' => 'badge-obesitas',
+                                    default => 'badge-normal',
+                                };
+                                $statusLabel = ucwords(str_replace('_', ' ', $status));
+                            } else {
+                                $badgeClass = 'badge-none';
+                                $statusLabel = 'Belum diperiksa';
+                            }
+                        @endphp
                         <tr>
                             <td>
-                                <span class="balita-avatar">A</span>
-                                Ayu Rahmawati
+                                <span class="balita-avatar {{ $balita->jenis_kelamin === 'L' ? 'blue' : '' }}">{{ strtoupper(substr($balita->nama_balita, 0, 1)) }}</span>
+                                {{ $balita->nama_balita }}
                             </td>
-                            <td>18 bln</td>
-                            <td><span class="badge badge-normal"><i class="bi bi-check-circle-fill"></i> Normal</span></td>
+                            <td>{{ $balita->umur_bulan }} bln</td>
+                            <td><span class="badge {{ $badgeClass }}"><i class="bi bi-check-circle-fill"></i> {{ $statusLabel }}</span></td>
                         </tr>
+                        @empty
                         <tr>
-                            <td>
-                                <span class="balita-avatar blue">R</span>
-                                Rizky Pratama
-                            </td>
-                            <td>24 bln</td>
-                            <td><span class="badge badge-stunting"><i class="bi bi-exclamation-circle-fill"></i> Stunting</span></td>
+                            <td colspan="3" style="text-align:center;color:var(--g-muted);padding:24px">Belum ada balita terdaftar</td>
                         </tr>
-                        <tr>
-                            <td>
-                                <span class="balita-avatar">S</span>
-                                Siti Nurhaliza
-                            </td>
-                            <td>12 bln</td>
-                            <td><span class="badge badge-normal"><i class="bi bi-check-circle-fill"></i> Normal</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="balita-avatar blue">M</span>
-                                Muhammad Farhan
-                            </td>
-                            <td>36 bln</td>
-                            <td><span class="badge badge-buruk"><i class="bi bi-x-circle-fill"></i> Gizi Buruk</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="balita-avatar">D</span>
-                                Dewi Anggraini
-                            </td>
-                            <td>8 bln</td>
-                            <td><span class="badge badge-normal"><i class="bi bi-check-circle-fill"></i> Normal</span></td>
-                        </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
@@ -651,62 +591,23 @@
                     <a href="/jadwal" class="card-link">Lihat Semua <i class="bi bi-arrow-right"></i></a>
                 </div>
                 <div class="jadwal-list">
+                    @forelse($jadwalMendatang as $j)
                     <div class="jadwal-item">
                         <div class="jadwal-date">
-                            <div class="day">17</div>
-                            <div class="month">Jun</div>
+                            <div class="day">{{ \Carbon\Carbon::parse($j->tanggal)->format('d') }}</div>
+                            <div class="month">{{ \Carbon\Carbon::parse($j->tanggal)->format('M') }}</div>
                         </div>
                         <div class="jadwal-info">
-                            <div class="jadwal-name">Posyandu Rutin RW 03</div>
+                            <div class="jadwal-name">{{ $j->nama_kegiatan }}</div>
                             <div class="jadwal-meta">
-                                <span><i class="bi bi-clock"></i> 08.00 – 11.00</span>
-                                <span><i class="bi bi-geo-alt"></i> Balai RW 03</span>
+                                <span><i class="bi bi-geo-alt"></i> {{ $j->lokasi ?? 'Lokasi belum ditentukan' }}</span>
                             </div>
                         </div>
-                        <span class="tipe-badge tipe-posyandu">Posyandu</span>
+                        <span class="tipe-badge tipe-{{ $j->tipe_kegiatan }}">{{ ucfirst($j->tipe_kegiatan) }}</span>
                     </div>
-                    <div class="jadwal-item">
-                        <div class="jadwal-date">
-                            <div class="day">19</div>
-                            <div class="month">Jun</div>
-                        </div>
-                        <div class="jadwal-info">
-                            <div class="jadwal-name">Imunisasi DPT-HB-Hib</div>
-                            <div class="jadwal-meta">
-                                <span><i class="bi bi-clock"></i> 09.00 – 12.00</span>
-                                <span><i class="bi bi-geo-alt"></i> Puskesmas Banjar</span>
-                            </div>
-                        </div>
-                        <span class="tipe-badge tipe-imunisasi">Imunisasi</span>
-                    </div>
-                    <div class="jadwal-item">
-                        <div class="jadwal-date">
-                            <div class="day">22</div>
-                            <div class="month">Jun</div>
-                        </div>
-                        <div class="jadwal-info">
-                            <div class="jadwal-name">Penyuluhan Gizi Ibu Menyusui</div>
-                            <div class="jadwal-meta">
-                                <span><i class="bi bi-clock"></i> 13.00 – 15.00</span>
-                                <span><i class="bi bi-geo-alt"></i> Aula Kelurahan</span>
-                            </div>
-                        </div>
-                        <span class="tipe-badge tipe-penyuluhan">Penyuluhan</span>
-                    </div>
-                    <div class="jadwal-item">
-                        <div class="jadwal-date">
-                            <div class="day">25</div>
-                            <div class="month">Jun</div>
-                        </div>
-                        <div class="jadwal-info">
-                            <div class="jadwal-name">Posyandu Rutin RW 07</div>
-                            <div class="jadwal-meta">
-                                <span><i class="bi bi-clock"></i> 08.00 – 11.00</span>
-                                <span><i class="bi bi-geo-alt"></i> Pos Kesehatan RW 07</span>
-                            </div>
-                        </div>
-                        <span class="tipe-badge tipe-posyandu">Posyandu</span>
-                    </div>
+                    @empty
+                    <div style="padding:24px;text-align:center;color:var(--g-muted);font-size:13px">Belum ada jadwal mendatang</div>
+                    @endforelse
                 </div>
             </div>
 
