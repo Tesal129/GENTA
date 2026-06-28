@@ -325,7 +325,7 @@
                 </div>
 
                 <div class="card">
-                    <div class="card-header">Kegiatan per Tipe</div>
+                    <div class="card-header">Kegiatan</div>
                     @forelse($kegiatanPerTipe as $tipe => $total)
                         <div class="stat-row">
                             <span>{{ ucfirst($tipe) }}</span>
