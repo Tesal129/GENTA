@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Balita;
+use App\Models\Pemeriksaan;
 
 class BalitaController extends Controller
 {
@@ -66,5 +67,21 @@ class BalitaController extends Controller
     {
         Balita::findOrFail($id)->delete();
         return redirect()->route('balita.index')->with('success', 'Data balita berhasil dihapus.');
+    }
+
+
+public function grafik($id)
+    {
+    $balita = Balita::findOrFail($id);
+    
+    $pemeriksaan = Pemeriksaan::where('balita_id', $id)
+        ->orderBy('tanggal', 'asc')
+        ->get();
+
+    $labels = $pemeriksaan->pluck('tanggal')->map(fn($t) => \Carbon\Carbon::parse($t)->format('d M Y'));
+    $berat = $pemeriksaan->pluck('berat_badan');
+    $tinggi = $pemeriksaan->pluck('tinggi_badan');
+
+    return view('balita.grafik', compact('balita', 'labels', 'berat', 'tinggi'));
     }
 }

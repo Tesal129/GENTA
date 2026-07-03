@@ -15,6 +15,7 @@ use App\Http\Controllers\KaderController;
 
 
 Route::get('/', [LandingController::class, 'index'])->name('landing');
+Route::get('/balita/{id}/grafik', [BalitaController::class, 'grafik'])->name('balita.grafik');
 
 
 // ── Login & Logout ──────────────────────────────────────────────
