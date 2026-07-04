@@ -545,6 +545,7 @@
                             <th>Nama Balita</th>
                             <th>Usia</th>
                             <th>Status Gizi</th>
+                            <th style="text-align:right">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -569,12 +570,17 @@
                                 <span class="balita-avatar {{ $balita->jenis_kelamin === 'L' ? 'blue' : '' }}">{{ strtoupper(substr($balita->nama_balita, 0, 1)) }}</span>
                                 {{ $balita->nama_balita }}
                             </td>
-                            <td>{{ $balita->umur_bulan }} bln</td>
-                            <td><span class="badge {{ $badgeClass }}"><i class="bi bi-check-circle-fill"></i> {{ $statusLabel }}</span></td>
-                        </tr>
+                                <td>{{ $balita->umur_bulan }} bln</td>
+                                <td><span class="badge {{ $badgeClass }}"><i class="bi bi-check-circle-fill"></i> {{ $statusLabel }}</span></td>
+                                <td style="text-align:right">
+                                <a href="{{ route('balita.grafik', $balita->id_balita) }}" style="font-size:12px;font-weight:700;color:var(--g-blue);text-decoration:none;display:inline-flex;align-items:center;gap:4px">
+                                    <i class="bi bi-graph-up"></i> Grafik
+                            </a>
+                        </td>
+                    </tr>
                         @empty
                         <tr>
-                            <td colspan="3" style="text-align:center;color:var(--g-muted);padding:24px">Belum ada balita terdaftar</td>
+                            <td colspan="4" style="text-align:center;color:var(--g-muted);padding:24px">Belum ada balita terdaftar</td>
                         </tr>
                         @endforelse
                     </tbody>
