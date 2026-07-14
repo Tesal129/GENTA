@@ -117,7 +117,13 @@ class PemeriksaanController extends Controller
             ->with('success', 'Data pemeriksaan berhasil diperbarui.');
     }
 
-    
+    public function destroy(string $id)
+    {
+        Pemeriksaan::findOrFail($id)->delete();
+
+        return redirect()->route('pemeriksaan.index')
+            ->with('success', 'Data pemeriksaan berhasil dihapus.');
+    }
 
     private function hitungStatusGizi(float $berat, float $tinggi, string $tanggalLahir, string $tanggalPeriksa): string
     {
