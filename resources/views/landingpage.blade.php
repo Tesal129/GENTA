@@ -265,7 +265,6 @@
     <div class="nav-links">
         <a href="#fitur">Fitur</a>
         <a href="#cara-kerja">Cara Kerja</a>
-        <a href="#tentang">Tentang</a>
         <a href="#kontak">Kontak</a>
     </div>
     <div class="nav-cta">
@@ -292,7 +291,6 @@
     <div class="drawer-nav">
         <a href="#fitur"     onclick="closeDrawer()">Fitur</a>
         <a href="#cara-kerja" onclick="closeDrawer()">Cara Kerja</a>
-        <a href="#tentang"   onclick="closeDrawer()">Tentang</a>
         <a href="#kontak"    onclick="closeDrawer()">Kontak</a>
     </div>
     <div class="drawer-divider"></div>
