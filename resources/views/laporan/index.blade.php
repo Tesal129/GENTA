@@ -168,6 +168,10 @@
             background: var(--g-white);
             border-bottom: 1px solid var(--g-border);
             padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
         }
 
         .topbar h1 {
@@ -180,6 +184,110 @@
             font-size: 13px;
             color: var(--g-muted);
             margin-top: 2px;
+        }
+
+        .topbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 9px 16px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 700;
+            font-family: 'Lato', sans-serif;
+            cursor: pointer;
+            border: 1px solid var(--g-border);
+            text-decoration: none;
+            transition: background .15s;
+        }
+
+        .btn-outline {
+            background: var(--g-white);
+            color: var(--g-text);
+        }
+
+        .btn-outline:hover {
+            background: var(--g-bg2);
+        }
+
+        .btn-solid {
+            background: var(--g-green);
+            border-color: var(--g-green);
+            color: #fff;
+        }
+
+        .btn-solid:hover {
+            background: #0c8a63;
+        }
+
+        .riwayat-dropdown {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            width: 260px;
+            max-height: 320px;
+            overflow-y: auto;
+            background: var(--g-white);
+            border: 1px solid var(--g-border);
+            border-radius: 12px;
+            box-shadow: 0 12px 32px rgba(10, 22, 40, .12);
+            z-index: 100;
+            display: none;
+        }
+
+        .riwayat-dropdown.open {
+            display: block;
+        }
+
+        .riwayat-item {
+            display: block;
+            padding: 12px 16px;
+            font-size: 13px;
+            color: var(--g-text);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(21, 101, 192, .05);
+        }
+
+        .riwayat-item:last-child {
+            border-bottom: none;
+        }
+
+        .riwayat-item:hover {
+            background: var(--g-bg2);
+            color: var(--g-green);
+        }
+
+        .riwayat-item.active {
+            background: var(--g-green-lite);
+            color: var(--g-green);
+            font-weight: 700;
+        }
+
+        .riwayat-empty {
+            padding: 16px;
+            font-size: 13px;
+            color: var(--g-muted);
+            text-align: center;
+        }
+
+        .periode-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--g-green-lite);
+            color: var(--g-green);
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 100px;
+            margin-top: 6px;
         }
 
         .content {
@@ -275,6 +383,10 @@
             .grid-2 {
                 grid-template-columns: 1fr;
             }
+            .topbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
@@ -284,8 +396,35 @@
 
     <div class="main">
         <div class="topbar">
-            <h1>Statistik & Laporan</h1>
-            <p>Ringkasan data posyandu GENTA</p>
+            <div>
+                <h1>Statistik & Laporan</h1>
+                <p>Ringkasan data posyandu GENTA</p>
+                <span class="periode-badge">
+                    <i class="bi bi-calendar3"></i>
+                    {{ \Carbon\Carbon::create()->month($bulan)->translatedFormat('F') }} {{ $tahun }}
+                </span>
+            </div>
+
+            <div class="topbar-actions">
+                <button type="button" class="btn btn-outline" onclick="toggleRiwayat()">
+                    <i class="bi bi-clock-history"></i> Riwayat
+                </button>
+
+                <div class="riwayat-dropdown" id="riwayatDropdown">
+                    @forelse($riwayatBulan as $r)
+                        <a href="{{ route('laporan.index', ['bulan' => $r->bulan, 'tahun' => $r->tahun]) }}"
+                           class="riwayat-item {{ (int)$r->bulan === (int)$bulan && (int)$r->tahun === (int)$tahun ? 'active' : '' }}">
+                            {{ \Carbon\Carbon::create()->month($r->bulan)->translatedFormat('F') }} {{ $r->tahun }}
+                        </a>
+                    @empty
+                        <div class="riwayat-empty">Belum ada riwayat data</div>
+                    @endforelse
+                </div>
+
+                <a href="{{ route('laporan.pdf', ['bulan' => $bulan, 'tahun' => $tahun]) }}" class="btn btn-solid">
+                    <i class="bi bi-file-earmark-pdf"></i> Download PDF
+                </a>
+            </div>
         </div>
 
         <div class="content">
@@ -371,6 +510,19 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function toggleRiwayat() {
+            document.getElementById('riwayatDropdown').classList.toggle('open');
+        }
+        document.addEventListener('click', function (e) {
+            const dropdown = document.getElementById('riwayatDropdown');
+            const isButton = e.target.closest('button[onclick="toggleRiwayat()"]');
+            if (!dropdown.contains(e.target) && !isButton) {
+                dropdown.classList.remove('open');
+            }
+        });
+    </script>
 
 </body>
 </html>
