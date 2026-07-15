@@ -310,21 +310,11 @@
             <a href="/register" class="btn-hero-primary">Yuk Daftar</a>
             <a href="#fitur" class="btn-hero-ghost">Lihat Fitur</a>
         </div>
-        <div class="hero-stats">
-            <div class="hero-stat-item"><div class="num">2.400+</div><div class="lbl">Balita Terdaftar</div></div>
-            <div class="hero-stat-item"><div class="num">120+</div><div class="lbl">Posyandu Aktif</div></div>
-            <div class="hero-stat-item"><div class="num">98%</div><div class="lbl">Kepuasan Kader</div></div>
-        </div>
     </div>
 </section>
 
 <!-- ══ STATS BAR ══ -->
-<div class="stats-section">
-    <div class="stat-block reveal"><div class="big-num">2.4K+</div><div class="big-lbl">Balita Terpantau</div></div>
-    <div class="stat-block reveal"><div class="big-num">120+</div><div class="big-lbl">Posyandu Terhubung</div></div>
-    <div class="stat-block reveal"><div class="big-num">98%</div><div class="big-lbl">Tingkat Akurasi Data</div></div>
-    <div class="stat-block reveal"><div class="big-num">3x</div><div class="big-lbl">Lebih Cepat dari Manual</div></div>
-</div>
+
 
 <!-- ══ FEATURES ══ -->
 <section class="section" id="fitur">
