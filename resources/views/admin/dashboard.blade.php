@@ -567,8 +567,10 @@
                         @endphp
                         <tr>
                             <td>
-                                <span class="balita-avatar {{ $balita->jenis_kelamin === 'L' ? 'blue' : '' }}">{{ strtoupper(substr($balita->nama_balita, 0, 1)) }}</span>
-                                {{ $balita->nama_balita }}
+                                <div style="display: flex; align-items: center;">
+                                    <span class="balita-avatar {{ $balita->jenis_kelamin === 'L' ? 'blue' : '' }}" style="flex-shrink: 0;">{{ strtoupper(substr($balita->nama_balita, 0, 1)) }}</span>
+                                    <span style="line-height: 1.4; word-break: break-word;">{{ $balita->nama_balita }}</span>
+                                </div>
                             </td>
                                 <td>{{ $balita->umur_bulan }} bln</td>
                                 <td><span class="badge {{ $badgeClass }}"><i class="bi bi-check-circle-fill"></i> {{ $statusLabel }}</span></td>
