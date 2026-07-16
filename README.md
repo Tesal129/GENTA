@@ -1,58 +1,86 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# GENTA - Sistem Informasi Manajemen Posyandu
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+GENTA adalah sebuah aplikasi berbasis web yang dirancang untuk membantu kader Posyandu dalam mengelola data balita, jadwal imunisasi, pencatatan pemeriksaan (berat & tinggi badan), pemantauan status gizi (stunting, gizi buruk, obesitas), serta penyediaan konten edukasi bagi orang tua.
 
-## About Laravel
+Aplikasi ini dibangun menggunakan framework **Laravel** dan didesain dengan antarmuka yang modern, responsif, serta mudah digunakan oleh para kader.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ✨ Fitur Utama
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Dashboard Informatif**: Ringkasan data balita terdaftar, jadwal bulan ini, balita yang perlu perhatian khusus, dan metrik lainnya.
+- **Manajemen Data Balita**: Pencatatan data lengkap balita termasuk nama, usia, NIK, dan jenis kelamin.
+- **Pencatatan Pemeriksaan**: Fitur untuk mencatat hasil pemeriksaan rutin (berat badan, tinggi badan) dan otomatis menghitung status gizi balita.
+- **Grafik Pertumbuhan**: Visualisasi grafik riwayat berat dan tinggi badan balita dari waktu ke waktu.
+- **Jadwal Kegiatan**: Pengelolaan jadwal kegiatan Posyandu bulanan (imunisasi, penyuluhan, dsb).
+- **Statistik & Laporan**: Laporan tumbuh kembang anak untuk diekspor atau dicetak.
+- **Manajemen Kader (Admin)**: Pengelolaan akun kader Posyandu.
+- **Konten Edukasi**: Artikel dan materi seputar kesehatan anak dan pola asuh.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🚀 Teknologi yang Digunakan
 
-## Learning Laravel
+- **Backend**: Laravel 12 (PHP 8.2+)
+- **Frontend**: HTML5, CSS3, JavaScript (Vanilla), Bootstrap Icons
+- **Database**: MySQL / PostgreSQL (tergantung konfigurasi environment)
+- **Deployment**: Mendukung platform modern seperti Railway, Vercel, dll.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🛠️ Cara Instalasi (Local Development)
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Ikuti langkah-langkah di bawah ini untuk menjalankan aplikasi GENTA di komputer lokal kamu:
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+1. **Clone Repository**
+   ```bash
+   git clone https://github.com/username/genta.git
+   cd genta
+   ```
 
-## Agentic Development
+2. **Install Dependencies**
+   ```bash
+   composer install
+   npm install
+   ```
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+3. **Konfigurasi Environment**
+   Salin file `.env.example` menjadi `.env`:
+   ```bash
+   cp .env.example .env
+   ```
+   Sesuaikan konfigurasi database di dalam file `.env`:
+   ```env
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=nama_database_kamu
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
 
-```bash
-composer require laravel/boost --dev
+4. **Generate Application Key**
+   ```bash
+   php artisan key:generate
+   ```
 
-php artisan boost:install
+5. **Migrasi Database & Seeder**
+   Pastikan kamu sudah membuat database kosong sesuai nama di `.env`, lalu jalankan:
+   ```bash
+   php artisan migrate --seed
+   ```
+
+6. **Jalankan Server Lokal**
+   ```bash
+   php artisan serve
+   ```
+   Aplikasi bisa diakses melalui `http://localhost:8000`.
+
+## 🌐 Catatan Deployment (Railway)
+
+Jika melakukan deployment ke platform reverse proxy seperti Railway, pastikan *environment variables* berikut diset agar aset dan form berjalan di HTTPS dengan aman:
+
+```env
+APP_ENV=production
+APP_URL=https://genta-production.up.railway.app
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+> **Catatan**: Aplikasi sudah dikonfigurasi untuk `TrustProxies` dan memaksakan (*force*) HTTPS jika `APP_ENV=production`.
 
-## Contributing
+## 📄 Lisensi
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Proyek ini bersifat *open-source* dan didistribusikan di bawah Lisensi [MIT](https://opensource.org/licenses/MIT).
