@@ -28,8 +28,4 @@ class User extends Authenticatable
 
     
     // Login pakai username, bukan email
-    public function getAuthIdentifierName()
-    {
-        return 'username';
-    }
 }

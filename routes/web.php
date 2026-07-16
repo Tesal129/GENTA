@@ -54,6 +54,7 @@ Route::middleware('auth')->group(function () {
 
     // Laporan
     Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
+    Route::get('/laporan/pdf', [LaporanController::class, 'pdf'])->name('laporan.pdf');
 
     // Kelola Kader
     Route::get('/kelola-user', [KaderController::class, 'index'])->name('kader.index');

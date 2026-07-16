@@ -632,6 +632,9 @@
                         <td>{{ $balita->nama_ibu ?? '-' }}</td>
                         <td>
                             <div class="action-btns">
+                                <a href="{{ route('balita.grafik', $balita->id_balita) }}" class="btn-icon view" title="Lihat Grafik">
+                                    <i class="bi bi-graph-up"></i>
+                                </a>
                                 <a href="{{ route('balita.edit', $balita->id_balita) }}" class="btn-icon edit" title="Edit">
                                     <i class="bi bi-pencil"></i>
                                 </a>

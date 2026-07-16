@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Balita;
 use App\Models\Pemeriksaan;
+use Carbon\Carbon;
 
 class BalitaController extends Controller
 {
@@ -71,17 +72,17 @@ class BalitaController extends Controller
 
 
 public function grafik($id)
-    {
+{
     $balita = Balita::findOrFail($id);
-    
-    $pemeriksaan = Pemeriksaan::where('balita_id', $id)
-        ->orderBy('tanggal', 'asc')
+
+    $pemeriksaan = Pemeriksaan::where('Balita_id_balita', $id)
+        ->orderBy('tanggal_periksa', 'asc')
         ->get();
 
-    $labels = $pemeriksaan->pluck('tanggal')->map(fn($t) => \Carbon\Carbon::parse($t)->format('d M Y'));
-    $berat = $pemeriksaan->pluck('berat_badan');
+    $labels = $pemeriksaan->pluck('tanggal_periksa')->map(fn($t) => Carbon::parse($t)->format('d M Y'));
+    $berat  = $pemeriksaan->pluck('berat_badan');
     $tinggi = $pemeriksaan->pluck('tinggi_badan');
 
     return view('balita.grafik', compact('balita', 'labels', 'berat', 'tinggi'));
-    }
+}
 }
