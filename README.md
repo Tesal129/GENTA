@@ -81,6 +81,16 @@ APP_URL=https://genta-production.up.railway.app
 
 > **Catatan**: Aplikasi sudah dikonfigurasi untuk `TrustProxies` dan memaksakan (*force*) HTTPS jika `APP_ENV=production`.
 
+## 🎓 Tentang Proyek
+
+Proyek ini dibuat untuk memenuhi persyaratan **Proyek 1 D4 Teknik Informatika ULBI (Universitas Logistik dan Bisnis Internasional)**.
+
+**Anggota Kelompok:**
+- Abieza Febrian Mahardika (714250049)
+- Tesal Slamet Mulyanardi (714250018)
+
+---
+
 ## 📄 Lisensi
 
 Proyek ini bersifat *open-source* dan didistribusikan di bawah Lisensi [MIT](https://opensource.org/licenses/MIT).
