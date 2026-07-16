@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="icon" href="{{ asset('logo.png') }}" type="image/png">
+    <link rel="icon" href="{{ asset('logo.png') }}?v=2" type="image/png">
     <meta charset="UTF-8">
     <style>
         body { font-family: sans-serif; font-size: 12px; color: #1A2E3B; }
@@ -83,3 +83,4 @@
     </table>
 </body>
 </html>
+

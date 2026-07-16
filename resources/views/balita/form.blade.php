@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <link rel="icon" href="{{ asset('logo.png') }}" type="image/png">
+    <link rel="icon" href="{{ asset('logo.png') }}?v=2" type="image/png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ isset($balita) ? 'Edit' : 'Tambah' }} Balita – GENTA</title>
@@ -490,3 +490,4 @@
 
 </body>
 </html>
+
