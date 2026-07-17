@@ -13,6 +13,21 @@
         *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
         :root { --g-bg:#F7FBFF; --g-bg2:#EEF9F4; --g-green:#0E9E72; --g-green-lite:#E6F7F1; --g-blue:#1565C0; --g-dark:#0A1628; --g-text:#1A2E3B; --g-muted:#7A9BB0; --g-border:rgba(21,101,192,.1); --g-white:#FFFFFF; --sidebar-w:240px; }
         body { font-family:'Lato',sans-serif; background:var(--g-bg); color:var(--g-text); display:flex; min-height:100vh; }
+        .sidebar { width:var(--sidebar-w); background:var(--g-white); border-right:1px solid var(--g-border); display:flex; flex-direction:column; position:fixed; top:0; left:0; bottom:0; z-index:50; }
+        .sidebar-brand { display:flex; align-items:center; gap:10px; padding:24px 20px 20px; border-bottom:1px solid var(--g-border); text-decoration:none; }
+        .sidebar-brand span { font-size:17px; font-weight:900; color:var(--g-dark); }
+        .sidebar-section { padding:20px 12px 8px; }
+        .sidebar-section-label { font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--g-muted); padding:0 8px; margin-bottom:6px; }
+        .nav-item { display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:10px; text-decoration:none; color:var(--g-text2); font-size:14px; margin-bottom:2px; }
+        .nav-item:hover { background:var(--g-bg2); color:var(--g-green); }
+        .nav-item.active { background:var(--g-green-lite); color:var(--g-green); font-weight:700; }
+        .nav-badge { margin-left:auto; background:var(--g-green); color:#fff; font-size:10px; font-weight:700; padding:2px 7px; border-radius:100px; }
+        .sidebar-footer { margin-top:auto; padding:16px 12px; border-top:1px solid var(--g-border); }
+        .user-card { display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:10px; background:var(--g-bg); border:1px solid var(--g-border); }
+        .user-avatar { width:34px; height:34px; border-radius:50%; background:var(--g-blue); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:900; color:#fff; }
+        .user-info .user-name { font-size:13px; font-weight:700; }
+        .user-info .user-role { font-size:11px; color:var(--g-muted); }
+        .logout-btn { margin-left:auto; background:none; border:none; color:var(--g-muted); cursor:pointer; }
         .main { margin-left:var(--sidebar-w); flex:1; }
         .topbar { background:var(--g-white); border-bottom:1px solid var(--g-border); padding:16px 32px; display: flex; align-items: center; gap: 16px; }
         .btn-back { width: 36px; height: 36px; border-radius: 8px; background: var(--g-bg); display: flex; align-items: center; justify-content: center; color: var(--g-dark); text-decoration: none; border: 1px solid var(--g-border); transition: .2s; }
