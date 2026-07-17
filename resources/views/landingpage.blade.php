@@ -217,6 +217,11 @@
         .footer-col a:hover { color:var(--g-green); }
         .footer-bottom { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; padding-top:24px; border-top:1px solid var(--g-border); font-size:12px; color:var(--g-muted); font-weight:400; }
 
+        /* ══ EDUKASI ══ */
+        .edu-featured-card { margin-top:40px; background:#fff; border-radius:24px; padding:32px; display:flex; gap:32px; align-items:center; box-shadow:0 12px 40px rgba(21,101,192,.08); }
+        .edu-featured-thumb { flex:1; min-width:300px; border-radius:16px; overflow:hidden; }
+        .edu-featured-content { flex:1; min-width:300px; }
+
         /* ══ ANIMATIONS ══ */
         @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
         .reveal { opacity:0; transform:translateY(30px); transition:opacity .7s, transform .7s; }
@@ -238,6 +243,9 @@
             .section { padding:70px 24px; }
             .how-section { padding:70px 24px; }
             footer { padding:48px 24px 24px; }
+            .edu-featured-card { flex-direction: column; padding: 24px; gap: 20px; }
+            .edu-featured-thumb { min-width: 100%; width: 100%; }
+            .edu-featured-content { min-width: 100%; width: 100%; }
         }
 
         @media (max-width: 600px) {
@@ -324,13 +332,13 @@
         <p class="section-sub">Dapatkan informasi penting untuk mendukung kesehatan ibu dan anak.</p>
     </div>
     
-    <div class="reveal" style="margin-top:40px; background:#fff; border-radius:24px; padding:32px; display:flex; gap:32px; align-items:center; box-shadow:0 12px 40px rgba(21,101,192,.08); flex-wrap: wrap;">
+    <div class="reveal edu-featured-card">
         @if($featuredEdukasi->gambar_thumbnail)
-            <div style="flex:1; min-width:300px; border-radius:16px; overflow:hidden;">
+            <div class="edu-featured-thumb">
                 <img src="{{ Storage::url($featuredEdukasi->gambar_thumbnail) }}" alt="{{ $featuredEdukasi->judul }}" style="width:100%; height:100%; object-fit:cover; display:block;">
             </div>
         @endif
-        <div style="flex:1; min-width:300px;">
+        <div class="edu-featured-content">
             <div style="display:inline-block; padding:6px 12px; background:var(--g-green-lite); color:var(--g-green); font-size:12px; font-weight:800; letter-spacing:0.05em; border-radius:100px; margin-bottom:16px; text-transform:uppercase;">
                 {{ $featuredEdukasi->kategori }}
             </div>
