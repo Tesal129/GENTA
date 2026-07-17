@@ -316,7 +316,39 @@
 
 <!-- ══ STATS BAR ══ -->
 
-
+@if(isset($featuredEdukasi))
+<!-- ══ EDUKASI FEATURED ══ -->
+<section class="section" style="background: linear-gradient(160deg, #F7FBFF 0%, #EEF7FF 100%);">
+    <div class="reveal">
+        <h2 class="section-title">Informasi & Edukasi<br>Kesehatan Terkini</h2>
+        <p class="section-sub">Dapatkan informasi penting untuk mendukung kesehatan ibu dan anak.</p>
+    </div>
+    
+    <div class="reveal" style="margin-top:40px; background:#fff; border-radius:24px; padding:32px; display:flex; gap:32px; align-items:center; box-shadow:0 12px 40px rgba(21,101,192,.08); flex-wrap: wrap;">
+        @if($featuredEdukasi->gambar_thumbnail)
+            <div style="flex:1; min-width:300px; border-radius:16px; overflow:hidden;">
+                <img src="{{ Storage::url($featuredEdukasi->gambar_thumbnail) }}" alt="{{ $featuredEdukasi->judul }}" style="width:100%; height:100%; object-fit:cover; display:block;">
+            </div>
+        @endif
+        <div style="flex:1; min-width:300px;">
+            <div style="display:inline-block; padding:6px 12px; background:var(--g-green-lite); color:var(--g-green); font-size:12px; font-weight:800; letter-spacing:0.05em; border-radius:100px; margin-bottom:16px; text-transform:uppercase;">
+                {{ $featuredEdukasi->kategori }}
+            </div>
+            <h3 style="font-size:28px; font-weight:900; color:var(--g-dark); line-height:1.2; margin-bottom:16px;">
+                {{ $featuredEdukasi->judul }}
+            </h3>
+            <p style="font-size:16px; color:var(--g-text2); line-height:1.7; margin-bottom:24px;">
+                {{ $featuredEdukasi->ringkasan }}
+            </p>
+            @if($featuredEdukasi->url_konten)
+            <a href="{{ $featuredEdukasi->url_konten }}" target="_blank" class="btn-hero-primary" style="padding:12px 24px;">
+                <i class="bi bi-box-arrow-up-right"></i> Baca Selengkapnya
+            </a>
+            @endif
+        </div>
+    </div>
+</section>
+@endif
 <!-- ══ FEATURES ══ -->
 <section class="section" id="fitur">
     <div class="reveal">

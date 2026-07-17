@@ -8,6 +8,7 @@ class LandingController extends Controller
 {
     public function index()
     {
-        return view('landingpage');
+        $featuredEdukasi = \App\Models\Edukasi::where('is_featured', true)->first();
+        return view('landingpage', compact('featuredEdukasi'));
     }
 }

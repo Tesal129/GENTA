@@ -50,7 +50,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/jadwal/{id}',   [JadwalController::class, 'destroy'])->name('jadwal.destroy');
 
     // Edukasi
-    Route::get('/edukasi', [EdukasiController::class, 'index'])->name('edukasi.index');
+    Route::resource('edukasi', EdukasiController::class)->except(['show']);
 
     // Laporan
     Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
