@@ -53,6 +53,14 @@
         .alert-error ul { margin-left: 20px; margin-top: 4px; }
         
         .img-preview { width: 100%; max-width: 300px; height: auto; border-radius: 8px; margin-top: 12px; border: 1px solid var(--g-border); display: none; }
+        @media (max-width: 768px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); }
+            .main { margin-left: 0; }
+            .topbar { padding: 14px 16px; flex-direction: column; align-items: flex-start; gap: 12px; }
+            .content { padding: 20px 16px; }
+            .checkbox-wrapper { flex-direction: column; }
+        }
     </style>
 </head>
 <body>

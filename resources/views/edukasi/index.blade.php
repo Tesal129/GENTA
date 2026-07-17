@@ -48,6 +48,14 @@
         .btn-delete { background: rgba(220,53,69,.1); color: #dc3545; padding: 8px 12px; border-radius: 6px; border: none; cursor: pointer; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; flex: 1; justify-content: center; }
         .badge-featured { position: absolute; top: 12px; right: 12px; background: #FFC107; color: #000; font-size: 10px; font-weight: 900; padding: 4px 8px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,.1); }
         .alert { background: #E6F7F1; color: var(--g-green); padding: 12px 16px; border-radius: 8px; font-size: 14px; font-weight: 700; margin-bottom: 20px; }
+        @media (max-width: 768px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); }
+            .main { margin-left: 0; }
+            .topbar { padding: 14px 16px; flex-direction: column; align-items: flex-start; gap: 12px; }
+            .content { padding: 20px 16px; }
+            .edu-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
