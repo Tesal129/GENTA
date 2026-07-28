@@ -92,6 +92,8 @@ Proyek ini dibuat untuk memenuhi persyaratan **Proyek 1 D4 Teknik Informatika UL
 - Abieza Febrian Mahardika (714250049)
 - Tesal Slamet Mulyanardi (714250018)
 
+**Dosen Pembimbing:**
+- Dr. Mohamad Nurkamal Fauzan, S.T.,M.T.,SFPC.
 ---
 
 ## 📄 Lisensi
