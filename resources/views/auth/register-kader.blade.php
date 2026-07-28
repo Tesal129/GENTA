@@ -314,7 +314,7 @@
 
                 <!-- Nama Kader -->
                 <div class="form-group">
-                    <label for="nama_kader">Nama Lengkap</label>
+                    <label for="nama_kader">Pilih Role</label>
                     <div class="input-wrap">
                         <i class="bi bi-person-badge"></i>
                         <select
@@ -324,7 +324,7 @@
                             autofocus
                             style="cursor: pointer; appearance: none; -webkit-appearance: none; -moz-appearance: none;"
                         >
-                            <option value="">-- Pilih Nama Kader --</option>
+                            <option value="">-- Pilih Role --</option>
                             <option value="Admin" {{ old('nama_kader') == 'Admin' ? 'selected' : '' }}>Admin</option>
                             <option value="Kader" {{ old('nama_kader') == 'Kader' ? 'selected' : '' }}>Kader</option>
                             <option value="Petugas Puskesmas" {{ old('nama_kader') == 'Petugas Puskesmas' ? 'selected' : '' }}>Petugas Puskesmas</option>
