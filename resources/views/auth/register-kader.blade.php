@@ -317,15 +317,18 @@
                     <label for="nama_kader">Nama Lengkap</label>
                     <div class="input-wrap">
                         <i class="bi bi-person-badge"></i>
-                        <input
-                            type="text"
+                        <select
                             id="nama_kader"
                             name="nama_kader"
                             class="form-control {{ $errors->has('nama_kader') ? 'is-invalid' : '' }}"
-                            placeholder="Nama kader posyandu"
-                            value="{{ old('nama_kader') }}"
                             autofocus
+                            style="cursor: pointer; appearance: none; -webkit-appearance: none; -moz-appearance: none;"
                         >
+                            <option value="">-- Pilih Nama Kader --</option>
+                            <option value="Abieza Febrian Mahardika (714250049)" {{ old('nama_kader') == 'Abieza Febrian Mahardika (714250049)' ? 'selected' : '' }}>Abieza Febrian Mahardika (714250049)</option>
+                            <option value="Tesal Slamet Mulyanardi (714250018)" {{ old('nama_kader') == 'Tesal Slamet Mulyanardi (714250018)' ? 'selected' : '' }}>Tesal Slamet Mulyanardi (714250018)</option>
+                        </select>
+                        <i class="bi bi-chevron-down" style="position: absolute; right: 14px; left: auto; font-size: 12px; pointer-events: none;"></i>
                     </div>
                     @error('nama_kader')
                     <div class="invalid-feedback"><i class="bi bi-exclamation-circle"></i> {{ $message }}</div>
