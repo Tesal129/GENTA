@@ -11,8 +11,11 @@ Aplikasi ini dibangun menggunakan framework **Laravel** dan didesain dengan anta
 - **Pencatatan Pemeriksaan**: Fitur untuk mencatat hasil pemeriksaan rutin (berat badan, tinggi badan) dan otomatis menghitung status gizi balita.
 - **Grafik Pertumbuhan**: Visualisasi grafik riwayat berat dan tinggi badan balita dari waktu ke waktu.
 - **Jadwal Kegiatan**: Pengelolaan jadwal kegiatan Posyandu bulanan (imunisasi, penyuluhan, dsb).
-- **Statistik & Laporan**: Laporan tumbuh kembang anak untuk diekspor atau dicetak.
-- **Manajemen Kader (Admin)**: Pengelolaan akun kader Posyandu.
+- **Statistik & Laporan (Ekspor PDF)**: Ringkasan statistik tumbuh kembang anak beserta fitur *Download PDF* untuk pencetakan laporan per bulan.
+- **Manajemen Role**: Sistem multi-peran untuk Admin, Kader, dan Petugas Puskesmas.
+- **Pengaturan & Preferensi**: Terdapat dukungan tema antarmuka **Dark Mode** dan preferensi pengaturan akun tingkat lanjut.
+- **Notifikasi WhatsApp**: Sistem pengingat jadwal posyandu dan pemeriksaan ulang gizi buruk terintegrasi (dalam pengembangan/mockup).
+- **Riwayat Keamanan**: Pencatatan *login log* pengguna untuk melacak aktivitas akses terbaru (Device & IP Address).
 - **Konten Edukasi**: Artikel dan materi seputar kesehatan anak dan pola asuh.
 
 ## 🚀 Teknologi yang Digunakan
