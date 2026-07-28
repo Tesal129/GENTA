@@ -19,6 +19,8 @@ class User extends Authenticatable
         'nama_kader',
         'role',
         'no_hp',
+        'notification_settings',
+        'dark_mode',
     ];
 
     protected $hidden = [
@@ -26,6 +28,13 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    
-    // Login pakai username, bukan email
+    protected $casts = [
+        'notification_settings' => 'array',
+        'dark_mode' => 'boolean',
+    ];
+
+    public function loginLogs()
+    {
+        return $this->hasMany(LoginLog::class, 'user_id', 'id_user');
+    }
 }

@@ -422,9 +422,6 @@
                     @endforelse
                 </div>
 
-                <a href="{{ route('laporan.pdf', ['bulan' => $bulan, 'tahun' => $tahun]) }}" class="btn btn-solid">
-                    <i class="bi bi-file-earmark-pdf"></i> Download PDF
-                </a>
             </div>
         </div>
 

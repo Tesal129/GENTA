@@ -64,6 +64,7 @@ Route::middleware('auth')->group(function () {
     // Pengaturan
     Route::get('/pengaturan', [ProfileController::class, 'show'])->name('pengaturan.index');
     Route::put('/pengaturan', [ProfileController::class, 'update'])->name('pengaturan.update');
+    Route::put('/pengaturan/preferensi', [ProfileController::class, 'updatePreferensi'])->name('pengaturan.preferensi');
 });
 
 
