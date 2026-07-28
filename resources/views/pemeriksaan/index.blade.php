@@ -74,7 +74,7 @@
         .pagination-info { font-size:12px; color:var(--g-muted); }
     </style>
 </head>
-<body>
+<body class="{{ auth()->check() && auth()->user()->dark_mode ? 'dark-mode' : '' }}">
 
 @include('partials.admin-sidebar', ['active' => 'pemeriksaan'])
 

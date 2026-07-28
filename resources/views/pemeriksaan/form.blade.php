@@ -65,7 +65,7 @@
         .btn-cancel:hover { background:var(--g-bg); }
     </style>
 </head>
-<body>
+<body class="{{ auth()->check() && auth()->user()->dark_mode ? 'dark-mode' : '' }}">
 <aside class="sidebar">
     <a href="/dashboard" class="sidebar-brand">
         <img src="{{ asset('https://www.image2url.com/r2/default/images/1780470981952-c4f72cc3-af32-42ae-9228-d8a982bc998a.png') }}" alt="Logo GENTA">

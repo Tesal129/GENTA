@@ -1,3 +1,43 @@
+<style>
+/* Dark Mode variables - Global */
+body.dark-mode {
+    --g-bg: #0f172a;
+    --g-green: #10b981;
+    --g-green-lite: rgba(16, 185, 129, 0.1);
+    --g-bg-card: #1e293b;
+    --g-text: #f1f5f9;
+    --g-text-muted: #94a3b8;
+    --g-border: #334155;
+    --g-gray: #334155;
+}
+body.dark-mode .form-card, body.dark-mode .sidebar, body.dark-mode .info-card {
+    background: var(--g-bg-card);
+    border-color: var(--g-border);
+}
+body.dark-mode input, body.dark-mode select, body.dark-mode textarea {
+    background: #0f172a;
+    color: #f1f5f9;
+    border-color: #475569;
+}
+body.dark-mode .sidebar a.active {
+    background: var(--g-green-lite);
+}
+body.dark-mode .sidebar a:hover {
+    background: #334155;
+}
+body.dark-mode table th {
+    background: #0f172a;
+    color: var(--g-text);
+}
+body.dark-mode table td, body.dark-mode table th {
+    border-color: #334155;
+}
+body.dark-mode .alert {
+    background: var(--g-green-lite);
+    border-color: var(--g-green);
+    color: var(--g-green);
+}
+</style>
 <aside class="sidebar">
     <a href="{{ route('dashboard') }}" class="sidebar-brand">
         <img src="{{ asset('https://www.image2url.com/r2/default/images/1780470981952-c4f72cc3-af32-42ae-9228-d8a982bc998a.png') }}" alt="Logo GENTA" style="width:38px;height:38px;border-radius:8px;">

@@ -63,7 +63,7 @@
         }
     </style>
 </head>
-<body>
+<body class="{{ auth()->check() && auth()->user()->dark_mode ? 'dark-mode' : '' }}">
 
 @include('partials.admin-sidebar', ['active' => 'edukasi'])
 
