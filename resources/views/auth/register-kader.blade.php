@@ -314,7 +314,7 @@
 
                 <!-- Nama Kader -->
                 <div class="form-group">
-                    <label for="nama_kader">Nama Lengkap</label>
+                    <label for="nama_kader">Nama Lengkap Kader</label>
                     <div class="input-wrap">
                         <i class="bi bi-person-badge"></i>
                         <input
@@ -351,6 +351,29 @@
                     <div class="invalid-feedback"><i class="bi bi-exclamation-circle"></i> {{ $message }}</div>
                     @enderror
                     <div class="hint">Gunakan huruf kecil, angka, atau underscore. Tidak bisa diubah.</div>
+                </div>
+
+                <!-- Role -->
+                <div class="form-group">
+                    <label for="role">Role / Peran</label>
+                    <div class="input-wrap">
+                        <i class="bi bi-person-gear"></i>
+                        <select
+                            id="role"
+                            name="role"
+                            class="form-control {{ $errors->has('role') ? 'is-invalid' : '' }}"
+                            style="cursor: pointer; appearance: none; -webkit-appearance: none; -moz-appearance: none;"
+                        >
+                            <option value="">-- Pilih Role --</option>
+                            <option value="Admin" {{ old('role') == 'Admin' ? 'selected' : '' }}>Admin</option>
+                            <option value="Kader" {{ old('role') == 'Kader' ? 'selected' : '' }}>Kader</option>
+                            <option value="Petugas Puskesmas" {{ old('role') == 'Petugas Puskesmas' ? 'selected' : '' }}>Petugas Puskesmas</option>
+                        </select>
+                        <i class="bi bi-chevron-down" style="position: absolute; right: 14px; left: auto; font-size: 12px; pointer-events: none;"></i>
+                    </div>
+                    @error('role')
+                    <div class="invalid-feedback"><i class="bi bi-exclamation-circle"></i> {{ $message }}</div>
+                    @enderror
                 </div>
 
                 <!-- Password -->

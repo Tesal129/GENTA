@@ -58,11 +58,13 @@ class AuthController extends Controller
         $request->validate([
             'nama_kader' => 'required|string|max:100',
             'username'   => 'required|string|max:50|unique:user,username',
+            'role'       => 'required|string',
             'password'   => 'required|string|min:6|confirmed',
         ], [
             'nama_kader.required' => 'Nama kader wajib diisi.',
             'username.required'   => 'Username wajib diisi.',
             'username.unique'     => 'Username sudah digunakan, coba yang lain.',
+            'role.required'       => 'Role wajib dipilih.',
             'password.required'   => 'Password wajib diisi.',
             'password.min'        => 'Password minimal 6 karakter.',
             'password.confirmed'  => 'Konfirmasi password tidak cocok.',
@@ -72,7 +74,7 @@ class AuthController extends Controller
             'nama_kader' => $request->nama_kader,
             'username'   => $request->username,
             'password'   => Hash::make($request->password),
-            'role'       => 'kader',
+            'role'       => $request->role,
         ]);
 
         Auth::login($user);
