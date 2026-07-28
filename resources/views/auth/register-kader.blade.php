@@ -325,8 +325,9 @@
                             style="cursor: pointer; appearance: none; -webkit-appearance: none; -moz-appearance: none;"
                         >
                             <option value="">-- Pilih Nama Kader --</option>
-                            <option value="Abieza Febrian Mahardika (714250049)" {{ old('nama_kader') == 'Abieza Febrian Mahardika (714250049)' ? 'selected' : '' }}>Abieza Febrian Mahardika (714250049)</option>
-                            <option value="Tesal Slamet Mulyanardi (714250018)" {{ old('nama_kader') == 'Tesal Slamet Mulyanardi (714250018)' ? 'selected' : '' }}>Tesal Slamet Mulyanardi (714250018)</option>
+                            <option value="Admin" {{ old('nama_kader') == 'Admin' ? 'selected' : '' }}>Admin</option>
+                            <option value="Kader" {{ old('nama_kader') == 'Kader' ? 'selected' : '' }}>Kader</option>
+                            <option value="Petugas Puskesmas" {{ old('nama_kader') == 'Petugas Puskesmas' ? 'selected' : '' }}>Petugas Puskesmas</option>
                         </select>
                         <i class="bi bi-chevron-down" style="position: absolute; right: 14px; left: auto; font-size: 12px; pointer-events: none;"></i>
                     </div>
