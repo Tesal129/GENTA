@@ -4,10 +4,16 @@ body.dark-mode {
     --g-bg: #0f172a;
     --g-green: #10b981;
     --g-green-lite: rgba(16, 185, 129, 0.1);
-    --g-bg-card: #1e293b;
+    --g-green-border: rgba(16, 185, 129, 0.2);
+    --g-blue: #3b82f6;
+    --g-blue-mid: #60a5fa;
+    --g-dark: #f8fafc;
     --g-text: #f1f5f9;
-    --g-text-muted: #94a3b8;
+    --g-text2: #cbd5e1;
+    --g-muted: #94a3b8;
     --g-border: #334155;
+    --g-white: #1e293b;
+    --g-bg-card: #1e293b;
     --g-gray: #334155;
 }
 body.dark-mode .form-card, body.dark-mode .sidebar, body.dark-mode .info-card {
