@@ -314,22 +314,18 @@
 
                 <!-- Nama Kader -->
                 <div class="form-group">
-                    <label for="nama_kader">Pilih Role</label>
+                    <label for="nama_kader">Nama Lengkap</label>
                     <div class="input-wrap">
                         <i class="bi bi-person-badge"></i>
-                        <select
+                        <input
+                            type="text"
                             id="nama_kader"
                             name="nama_kader"
                             class="form-control {{ $errors->has('nama_kader') ? 'is-invalid' : '' }}"
+                            placeholder="Nama kader posyandu"
+                            value="{{ old('nama_kader') }}"
                             autofocus
-                            style="cursor: pointer; appearance: none; -webkit-appearance: none; -moz-appearance: none;"
                         >
-                            <option value="">-- Pilih Role --</option>
-                            <option value="Admin" {{ old('nama_kader') == 'Admin' ? 'selected' : '' }}>Admin</option>
-                            <option value="Kader" {{ old('nama_kader') == 'Kader' ? 'selected' : '' }}>Kader</option>
-                            <option value="Petugas Puskesmas" {{ old('nama_kader') == 'Petugas Puskesmas' ? 'selected' : '' }}>Petugas Puskesmas</option>
-                        </select>
-                        <i class="bi bi-chevron-down" style="position: absolute; right: 14px; left: auto; font-size: 12px; pointer-events: none;"></i>
                     </div>
                     @error('nama_kader')
                     <div class="invalid-feedback"><i class="bi bi-exclamation-circle"></i> {{ $message }}</div>
