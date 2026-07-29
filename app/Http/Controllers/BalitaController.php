@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Balita;
 use App\Models\Pemeriksaan;
 use Carbon\Carbon;
+use App\Helpers\WhoStandards;
 
 class BalitaController extends Controller
 {
@@ -79,10 +80,28 @@ public function grafik($id)
         ->orderBy('tanggal_periksa', 'asc')
         ->get();
 
-    $labels = $pemeriksaan->pluck('tanggal_periksa')->map(fn($t) => Carbon::parse($t)->format('d M Y'));
-    $berat  = $pemeriksaan->pluck('berat_badan');
-    $tinggi = $pemeriksaan->pluck('tinggi_badan');
+    // Hitung umur (bulan) pada setiap titik pemeriksaan
+    $tgl_lahir = Carbon::parse($balita->tanggal_lahir);
+    
+    $labels = [];
+    $berat = [];
+    $tinggi = [];
 
-    return view('balita.grafik', compact('balita', 'labels', 'berat', 'tinggi'));
+    foreach ($pemeriksaan as $p) {
+        $tgl_periksa = Carbon::parse($p->tanggal_periksa);
+        $umur_bulan = $tgl_lahir->diffInMonths($tgl_periksa);
+        
+        // Batasi maksimal 60 bulan sesuai standar WHO
+        if ($umur_bulan <= 60) {
+            $labels[] = $umur_bulan;
+            $berat[]  = $p->berat_badan;
+            $tinggi[] = $p->tinggi_badan;
+        }
+    }
+
+    $whoWeight = WhoStandards::getWeightStandards($balita->jenis_kelamin);
+    $whoHeight = WhoStandards::getHeightStandards($balita->jenis_kelamin);
+
+    return view('balita.grafik', compact('balita', 'labels', 'berat', 'tinggi', 'whoWeight', 'whoHeight'));
 }
 }

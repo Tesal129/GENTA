@@ -382,7 +382,7 @@
                         <tr>
                             <th>Nama</th>
                             <th>Username</th>
-                            <th>No HP</th>
+
                             <th>Role</th>
                             <th>Aksi</th>
                         </tr>
@@ -392,7 +392,7 @@
                             <tr>
                                 <td>{{ $kader->nama_kader }}</td>
                                 <td>{{ $kader->username }}</td>
-                                <td>{{ $kader->no_hp ?? '-' }}</td>
+
                                 <td>
                                     <span class="role-badge role-{{ $kader->role }}">
                                         {{ ucfirst($kader->role) }}

@@ -271,58 +271,169 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    const labels = {!! json_encode($labels) !!};
-    const berat  = {!! json_encode($berat) !!};
-    const tinggi = {!! json_encode($tinggi) !!};
+    const childLabels = {!! json_encode($labels) !!}; // Umur dalam bulan
+    const childBerat  = {!! json_encode($berat) !!};
+    const childTinggi = {!! json_encode($tinggi) !!};
+    const whoWeight   = {!! json_encode($whoWeight) !!};
+    const whoHeight   = {!! json_encode($whoHeight) !!};
+
+    const fullLabels = Array.from({length: 61}, (_, i) => i);
+    
+    // Map child data to 0-60 months
+    const mappedBerat = Array(61).fill(null);
+    const mappedTinggi = Array(61).fill(null);
+    
+    childLabels.forEach((month, idx) => {
+        if (month <= 60) {
+            mappedBerat[month] = childBerat[idx];
+            mappedTinggi[month] = childTinggi[idx];
+        }
+    });
+
+    const commonOptions = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+                labels: { font: { family: "'Lato', sans-serif", size: 11 }, usePointStyle: true }
+            },
+            tooltip: {
+                callbacks: {
+                    title: (ctx) => 'Umur: ' + ctx[0].label + ' Bulan'
+                }
+            }
+        },
+        scales: {
+            x: { 
+                title: { display: true, text: 'Umur (Bulan)' },
+                grid: { display: false } 
+            },
+            y: { grid: { color: 'rgba(21,101,192,.08)' } }
+        }
+    };
 
     new Chart(document.getElementById('chartBerat'), {
         type: 'line',
         data: {
-            labels: labels,
-            datasets: [{
-                label: 'Berat Badan (kg)',
-                data: berat,
-                borderColor: '#1565C0',
-                backgroundColor: 'rgba(21, 101, 192, 0.1)',
-                tension: 0.3,
-                fill: true,
-                pointRadius: 4,
-                pointBackgroundColor: '#1565C0',
-            }]
+            labels: fullLabels,
+            datasets: [
+                {
+                    label: 'Pertumbuhan Anak (kg)',
+                    data: mappedBerat,
+                    borderColor: '#1565C0',
+                    backgroundColor: '#1565C0',
+                    borderWidth: 3,
+                    tension: 0,
+                    spanGaps: true,
+                    pointRadius: 5,
+                    pointBackgroundColor: '#fff',
+                    pointBorderWidth: 2,
+                    order: 1
+                },
+                {
+                    label: 'Median (Normal)',
+                    data: whoWeight.median,
+                    borderColor: '#10B981',
+                    borderWidth: 2,
+                    borderDash: [5, 5],
+                    fill: false,
+                    pointRadius: 0,
+                    order: 2
+                },
+                {
+                    label: '-2 SD (Batas Kurang)',
+                    data: whoWeight.sd2_neg,
+                    borderColor: '#F59E0B',
+                    backgroundColor: 'rgba(16, 185, 129, 0.15)',
+                    borderWidth: 1,
+                    fill: '-1',
+                    pointRadius: 0,
+                    order: 3
+                },
+                {
+                    label: '-3 SD (Sangat Kurang)',
+                    data: whoWeight.sd3_neg,
+                    borderColor: '#EF4444',
+                    backgroundColor: 'rgba(245, 158, 11, 0.15)',
+                    borderWidth: 1,
+                    fill: '-1',
+                    pointRadius: 0,
+                    order: 4
+                },
+                {
+                    label: 'Bahaya',
+                    data: Array(61).fill(0),
+                    borderColor: 'transparent',
+                    backgroundColor: 'rgba(239, 68, 68, 0.15)',
+                    fill: '-1',
+                    pointRadius: 0,
+                    order: 5
+                }
+            ]
         },
-        options: {
-            responsive: true,
-            plugins: { legend: { display: false } },
-            scales: {
-                x: { grid: { display: false } },
-                y: { grid: { color: 'rgba(21,101,192,.08)' } }
-            }
-        }
+        options: commonOptions
     });
 
     new Chart(document.getElementById('chartTinggi'), {
         type: 'line',
         data: {
-            labels: labels,
-            datasets: [{
-                label: 'Tinggi Badan (cm)',
-                data: tinggi,
-                borderColor: '#0E9E72',
-                backgroundColor: 'rgba(14, 158, 114, 0.1)',
-                tension: 0.3,
-                fill: true,
-                pointRadius: 4,
-                pointBackgroundColor: '#0E9E72',
-            }]
+            labels: fullLabels,
+            datasets: [
+                {
+                    label: 'Tinggi Anak (cm)',
+                    data: mappedTinggi,
+                    borderColor: '#1565C0',
+                    backgroundColor: '#1565C0',
+                    borderWidth: 3,
+                    tension: 0,
+                    spanGaps: true,
+                    pointRadius: 5,
+                    pointBackgroundColor: '#fff',
+                    pointBorderWidth: 2,
+                    order: 1
+                },
+                {
+                    label: 'Median (Normal)',
+                    data: whoHeight.median,
+                    borderColor: '#10B981',
+                    borderWidth: 2,
+                    borderDash: [5, 5],
+                    fill: false,
+                    pointRadius: 0,
+                    order: 2
+                },
+                {
+                    label: '-2 SD (Batas Pendek)',
+                    data: whoHeight.sd2_neg,
+                    borderColor: '#F59E0B',
+                    backgroundColor: 'rgba(16, 185, 129, 0.15)',
+                    borderWidth: 1,
+                    fill: '-1',
+                    pointRadius: 0,
+                    order: 3
+                },
+                {
+                    label: '-3 SD (Sangat Pendek)',
+                    data: whoHeight.sd3_neg,
+                    borderColor: '#EF4444',
+                    backgroundColor: 'rgba(245, 158, 11, 0.15)',
+                    borderWidth: 1,
+                    fill: '-1',
+                    pointRadius: 0,
+                    order: 4
+                },
+                {
+                    label: 'Bahaya',
+                    data: Array(61).fill(0),
+                    borderColor: 'transparent',
+                    backgroundColor: 'rgba(239, 68, 68, 0.15)',
+                    fill: '-1',
+                    pointRadius: 0,
+                    order: 5
+                }
+            ]
         },
-        options: {
-            responsive: true,
-            plugins: { legend: { display: false } },
-            scales: {
-                x: { grid: { display: false } },
-                y: { grid: { color: 'rgba(14,158,114,.08)' } }
-            }
-        }
+        options: commonOptions
     });
 </script>
 </body>
