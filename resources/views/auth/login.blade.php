@@ -419,7 +419,7 @@
             </div>
             <div style="text-align:center;margin-top:10px">
                 <a href="{{ route('register.kader') }}" style="font-size:12px;color:var(--g-muted);text-decoration:none">
-                    Kader baru? Buat akun di sini
+                    Petugas baru? Buat akun di sini
         </a>
     </div>
 
