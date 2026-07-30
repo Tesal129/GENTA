@@ -32,7 +32,7 @@ Route::get('/register-kader',  [AuthController::class, 'showRegisterKader'])->na
 Route::post('/register-kader', [AuthController::class, 'registerKader'])->name('register.kader.store');
 
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', \App\Http\Middleware\CheckOfficerRole::class])->group(function () {
     Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
 
     // Balita

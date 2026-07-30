@@ -398,12 +398,10 @@
                     @enderror
                 </div>
 
-                {{-- Remember + Lupa password --}}
                 <div class="form-bottom">
                     <label class="remember">
                         <input type="checkbox" name="remember"> Ingat saya
                     </label>
-                    <a href="#" class="forgot">Lupa password?</a>
                 </div>
 
                 <button type="submit" class="btn-submit">

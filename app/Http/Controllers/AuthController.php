@@ -45,6 +45,11 @@ class AuthController extends Controller
                 'login_at' => now(),
             ]);
 
+            if (Auth::user()->role === 'user' || Auth::user()->role === 'User Biasa') {
+                return redirect()->intended(route('landing'))
+                                 ->with('success', 'Selamat datang!');
+            }
+
             return redirect()->intended(route('dashboard'))
                              ->with('success', 'Selamat datang, ' . Auth::user()->nama_kader . '!');
         }
@@ -66,20 +71,26 @@ class AuthController extends Controller
         $request->validate([
             'nama_kader' => 'required|string|max:100',
             'username'   => 'required|string|max:50|unique:user,username',
+            'role'       => 'required|string',
             'kode_admin' => 'nullable|string',
             'password'   => 'required|string|min:6|confirmed',
         ], [
             'nama_kader.required' => 'Nama lengkap wajib diisi.',
             'username.required'   => 'Username wajib diisi.',
             'username.unique'     => 'Username sudah digunakan, coba yang lain.',
+            'role.required'       => 'Peran/Role wajib dipilih.',
             'password.required'   => 'Password wajib diisi.',
             'password.min'        => 'Password minimal 6 karakter.',
             'password.confirmed'  => 'Konfirmasi password tidak cocok.',
         ]);
 
-        $role = 'user';
-        if ($request->filled('kode_admin') && $request->kode_admin === 'ADMIN-GENTA') {
-            $role = 'admin';
+        $role = $request->role;
+        if ($role !== 'user' && $role !== 'User Biasa') {
+            if ($request->kode_admin !== 'ADMIN-GENTA') {
+                return back()->withErrors(['kode_admin' => 'Kode verifikasi admin salah atau kosong.'])->withInput();
+            }
+        } else {
+            $role = 'user';
         }
 
         $user = User::create([
@@ -90,6 +101,11 @@ class AuthController extends Controller
         ]);
 
         Auth::login($user);
+
+        if ($role === 'user') {
+            return redirect()->route('landing')
+                             ->with('success', 'Akun berhasil dibuat. Selamat datang!');
+        }
 
         return redirect()->route('dashboard')
                          ->with('success', 'Akun berhasil dibuat. Selamat datang, ' . $user->nama_kader . '!');
