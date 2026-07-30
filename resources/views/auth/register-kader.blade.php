@@ -298,8 +298,8 @@
         </a>
 
         <div class="auth-card">
-            <h1>Buat Akun Petugas</h1>
-            <p class="subtitle">Daftar sebagai Petugas untuk mengelola data balita.</p>
+            <h1>Buat Akun</h1>
+            <p class="subtitle">Daftar untuk mengelola data balita dan jadwal posyandu.</p>
 
             {{-- Error umum --}}
             @if($errors->any())
@@ -312,7 +312,7 @@
             <form method="POST" action="{{ route('register.kader.store') }}">
                 @csrf
 
-                <!-- Nama Kader -->
+                <!-- Nama Lengkap -->
                 <div class="form-group">
                     <label for="nama_kader">Nama Lengkap</label>
                     <div class="input-wrap">
@@ -322,7 +322,7 @@
                             id="nama_kader"
                             name="nama_kader"
                             class="form-control {{ $errors->has('nama_kader') ? 'is-invalid' : '' }}"
-                            placeholder="Nama kader posyandu"
+                            placeholder="Masukkan nama lengkap Anda"
                             value="{{ old('nama_kader') }}"
                             autofocus
                         >
@@ -351,29 +351,6 @@
                     <div class="invalid-feedback"><i class="bi bi-exclamation-circle"></i> {{ $message }}</div>
                     @enderror
                     <div class="hint">Gunakan huruf kecil, angka, atau underscore. Tidak bisa diubah.</div>
-                </div>
-
-                <!-- Role -->
-                <div class="form-group">
-                    <label for="role">Role / Peran</label>
-                    <div class="input-wrap">
-                        <i class="bi bi-person-gear"></i>
-                        <select
-                            id="role"
-                            name="role"
-                            class="form-control {{ $errors->has('role') ? 'is-invalid' : '' }}"
-                            style="cursor: pointer; appearance: none; -webkit-appearance: none; -moz-appearance: none;"
-                        >
-                            <option value="">-- Pilih Role --</option>
-                            <option value="Admin" {{ old('role') == 'Admin' ? 'selected' : '' }}>Admin</option>
-                            <option value="Kader" {{ old('role') == 'Kader' ? 'selected' : '' }}>Kader</option>
-                            <option value="Petugas Puskesmas" {{ old('role') == 'Petugas Puskesmas' ? 'selected' : '' }}>Petugas Puskesmas</option>
-                        </select>
-                        <i class="bi bi-chevron-down" style="position: absolute; right: 14px; left: auto; font-size: 12px; pointer-events: none;"></i>
-                    </div>
-                    @error('role')
-                    <div class="invalid-feedback"><i class="bi bi-exclamation-circle"></i> {{ $message }}</div>
-                    @enderror
                 </div>
 
                 <!-- Password -->
@@ -411,8 +388,28 @@
                     </div>
                 </div>
 
+                <!-- Kode Admin (Opsional) -->
+                <div class="form-group">
+                    <label for="kode_admin">Kode Verifikasi Admin <span style="color: var(--g-muted); font-weight: 400;">(Opsional)</span></label>
+                    <div class="input-wrap">
+                        <i class="bi bi-key"></i>
+                        <input
+                            type="text"
+                            id="kode_admin"
+                            name="kode_admin"
+                            class="form-control {{ $errors->has('kode_admin') ? 'is-invalid' : '' }}"
+                            placeholder="Kosongkan jika bukan admin"
+                            value="{{ old('kode_admin') }}"
+                        >
+                    </div>
+                    @error('kode_admin')
+                    <div class="invalid-feedback"><i class="bi bi-exclamation-circle"></i> {{ $message }}</div>
+                    @enderror
+                    <div class="hint">Isi dengan kode khusus dari pihak puskesmas/posyandu untuk mendapatkan akses admin.</div>
+                </div>
+
                 <button type="submit" class="btn-submit">
-                    <i class="bi bi-person-plus"></i> Daftar Sebagai Kader
+                    <i class="bi bi-person-plus"></i> Daftar Sekarang
                 </button>
             </form>
 
