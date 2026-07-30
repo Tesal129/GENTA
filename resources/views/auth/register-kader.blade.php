@@ -298,8 +298,8 @@
         </a>
 
         <div class="auth-card">
-            <h1>Buat Akun Kader</h1>
-            <p class="subtitle">Daftar sebagai kader posyandu untuk mengelola data balita.</p>
+            <h1>Buat Akun Petugas</h1>
+            <p class="subtitle">Daftar sebagai Petugas untuk mengelola data balita.</p>
 
             {{-- Error umum --}}
             @if($errors->any())
@@ -314,7 +314,7 @@
 
                 <!-- Nama Kader -->
                 <div class="form-group">
-                    <label for="nama_kader">Nama Lengkap Kader</label>
+                    <label for="nama_kader">Nama Lengkap</label>
                     <div class="input-wrap">
                         <i class="bi bi-person-badge"></i>
                         <input
