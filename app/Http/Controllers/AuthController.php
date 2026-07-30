@@ -78,7 +78,7 @@ class AuthController extends Controller
         ]);
 
         $role = 'user';
-        if ($request->filled('kode_admin') && $request->kode_admin === 'ADMIN-POSYANDU-2026') {
+        if ($request->filled('kode_admin') && $request->kode_admin === 'ADMIN-GENTA') {
             $role = 'admin';
         }
 
