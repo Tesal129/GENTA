@@ -13,6 +13,7 @@
             --g-green:        #0E9E72;
             --g-green-mid:    #12BC88;
             --g-blue:         #1565C0;
+            --g-blue-mid:     #1976D2;
             --g-dark:         #0A1628;
             --g-text:         #1A2E3B;
             --g-text2:        #3D5A6C;
