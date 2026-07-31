@@ -204,6 +204,21 @@
             border-color: rgba(224, 92, 92, .5);
         }
 
+        /* Fix autofill background */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover, 
+        input:-webkit-autofill:focus, 
+        input:-webkit-autofill:active{
+            -webkit-box-shadow: 0 0 0 30px var(--g-bg) inset !important;
+            -webkit-text-fill-color: var(--g-text) !important;
+            border: 1.5px solid var(--g-border) !important;
+        }
+
+        input:-webkit-autofill:focus {
+            -webkit-box-shadow: 0 0 0 30px var(--g-white) inset !important;
+            border-color: rgba(14,158,114,.45) !important;
+        }
+
         .invalid-feedback {
             font-size: 12px;
             color: #C53030;
