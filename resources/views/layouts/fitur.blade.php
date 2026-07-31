@@ -55,11 +55,15 @@
             border: 1px solid var(--g-border);
             border-radius: 24px;
             padding: 48px;
-            max-width: 600px;
+            max-width: 760px;
             width: 100%;
             box-shadow: 0 12px 48px rgba(21, 101, 192, .08);
-            text-align: center;
             animation: fadeUp .6s ease forwards;
+        }
+
+        .feature-header {
+            text-align: center;
+            margin-bottom: 36px;
         }
 
         .feature-icon {
@@ -79,14 +83,60 @@
             font-size: 28px;
             font-weight: 900;
             color: var(--g-dark);
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
-        p {
+        .headline {
             font-size: 16px;
-            line-height: 1.7;
+            line-height: 1.6;
             color: var(--g-text2);
-            margin-bottom: 32px;
+            font-weight: 400;
+        }
+
+        .feature-img-wrapper {
+            margin-bottom: 36px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--g-border);
+            background: var(--g-bg);
+            padding: 8px;
+            box-shadow: 0 8px 24px rgba(21, 101, 192, .06);
+        }
+
+        .feature-img-wrapper img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+        }
+
+        .content-area {
+            text-align: left;
+        }
+
+        .content-area ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 36px;
+        }
+
+        .content-area ul li {
+            position: relative;
+            padding-left: 32px;
+            margin-bottom: 16px;
+            font-size: 16px;
+            color: var(--g-text);
+            line-height: 1.6;
+        }
+
+        .content-area ul li::before {
+            content: '\F26A'; /* bootstrap icon check-circle-fill */
+            font-family: bootstrap-icons !important;
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--g-green);
+            font-size: 18px;
         }
 
         .btn-primary {
@@ -116,6 +166,7 @@
         @media (max-width: 600px) {
             nav { padding: 16px 20px; }
             .feature-card { padding: 32px 20px; }
+            .feature-header h1 { font-size: 24px; }
         }
     </style>
 </head>
@@ -131,12 +182,24 @@
 
 <main>
     <div class="feature-card">
-        <div class="feature-icon">
-            <i class="bi @yield('icon')"></i>
+        <div class="feature-header">
+            <div class="feature-icon">
+                <i class="bi @yield('icon')"></i>
+            </div>
+            <h1>@yield('title')</h1>
+            <p class="headline">@yield('headline')</p>
         </div>
-        <h1>@yield('title')</h1>
-        <p>@yield('description')</p>
-        <a href="/register" class="btn-primary">Mulai Gunakan GENTA</a>
+        
+        <div class="feature-img-wrapper">
+            <img src="@yield('image')" alt="@yield('title')">
+        </div>
+        
+        <div class="content-area">
+            @yield('content')
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="/register" class="btn-primary">Mulai Gunakan GENTA</a>
+            </div>
+        </div>
     </div>
 </main>
 

@@ -1,8 +1,14 @@
 @extends('layouts.fitur')
 
 @section('title', 'Jadwal & Pengingat')
-@section('icon', 'bi-calendar3')
+@section('icon', 'bi-calendar-check')
+@section('headline', 'Gak akan ada lagi jadwal imunisasi anak yang terlewat.')
+@section('image', asset('images/fitur/jadwal.png'))
 
-@section('description')
-Atur semua jadwal posyandu, mulai dari penimbangan bulanan, pemberian imunisasi, hingga penyuluhan kesehatan. Sistem ini memudahkan kader dalam menyusun agenda kegiatan agar berjalan lancar tanpa ada jadwal yang terlupakan.
+@section('content')
+<ul>
+    <li>Atur kalender posyandu dan jadwal imunisasi bulanan dengan mudah.</li>
+    <li>Orang tua dapat melihat pengumuman jadwal posyandu dari mana saja tanpa perlu menunggu pesan berantai.</li>
+    <li>Lebih teratur dan meminimalkan resiko anak telat mendapatkan pelayanan kesehatan penting.</li>
+</ul>
 @endsection

@@ -1,8 +1,14 @@
 @extends('layouts.fitur')
 
 @section('title', 'Grafik Pertumbuhan')
-@section('icon', 'bi-graph-up-arrow')
+@section('icon', 'bi-graph-up')
+@section('headline', 'Deteksi dini otomatis yang selalu disesuaikan dengan standar kesehatan WHO.')
+@section('image', asset('images/fitur/grafik.png'))
 
-@section('description')
-Pantau tren berat badan dan tinggi badan balita dengan visualisasi grafik yang interaktif. Grafik ini membantu kader dan orang tua untuk mendeteksi dini masalah kesehatan seperti stunting atau gizi buruk secara lebih mudah dan cepat dibandingkan metode manual.
+@section('content')
+<ul>
+    <li>Berdasarkan parameter Z-Score WHO untuk akurasi tingkat tinggi.</li>
+    <li>Orang tua bisa lihat langsung apakah anaknya tumbuh secara ideal sesuai kurva normal.</li>
+    <li>Sistem akan memberikan peringatan dini jika kurva pertumbuhan anak menurun atau berada di batas kuning/merah.</li>
+</ul>
 @endsection
