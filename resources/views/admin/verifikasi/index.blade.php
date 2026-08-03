@@ -45,6 +45,14 @@
         .nav-item i { font-size: 16px; width: 18px; text-align: center; }
         .nav-item:hover { background: var(--g-bg2); color: var(--g-green); }
         .nav-item.active { background: var(--g-green-lite); color: var(--g-green); font-weight: 700; }
+        .nav-badge { margin-left: auto; background: var(--g-green); color: #fff; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 100px; }
+        .sidebar-footer { margin-top: auto; padding: 16px 12px; border-top: 1px solid var(--g-border); }
+        .user-card { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; background: var(--g-bg); border: 1px solid var(--g-border); }
+        .user-avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--g-blue); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; color: #fff; flex-shrink: 0; }
+        .user-info .user-name { font-size: 13px; font-weight: 700; color: var(--g-dark); }
+        .user-info .user-role { font-size: 11px; color: var(--g-muted); }
+        .logout-btn { margin-left: auto; color: var(--g-muted); background: none; border: none; font-size: 16px; cursor: pointer; transition: color .2s; }
+        .logout-btn:hover { color: #e53e3e; }
         .main { margin-left: var(--sidebar-w); flex: 1; display: flex; flex-direction: column; }
         .topbar { background: var(--g-white); border-bottom: 1px solid var(--g-border); padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 40; }
         .topbar-left h1 { font-size: 20px; font-weight: 900; color: var(--g-dark); }
