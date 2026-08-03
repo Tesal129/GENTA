@@ -125,7 +125,7 @@ class AuthController extends Controller
     // ── Dashboard ────────────────────────────────────────────────────────
     public function dashboard()
     {
-        $totalBalita = Balita::count();
+        $totalBalita = Balita::where('status_verifikasi', 'approved')->count();
 
         $totalPemeriksaan = Pemeriksaan::whereMonth('tanggal_periksa', now()->month)
             ->whereYear('tanggal_periksa', now()->year)
@@ -141,7 +141,8 @@ class AuthController extends Controller
             ->get()
             ->count();
 
-        $balitaTerbaru = Balita::orderByDesc('id_balita')
+        $balitaTerbaru = Balita::where('status_verifikasi', 'approved')
+            ->orderByDesc('id_balita')
             ->limit(5)
             ->get()
             ->map(function (Balita $balita) {

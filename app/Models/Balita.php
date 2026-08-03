@@ -19,5 +19,8 @@ class Balita extends Model
         'nama_ayah',
         'no_hp_ortu',
         'alamat',
+        'foto_kk',
+        'status_verifikasi',
+        'alasan_penolakan'
     ];
 }

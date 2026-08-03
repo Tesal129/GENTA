@@ -12,7 +12,7 @@ class BalitaController extends Controller
 {
     public function index()
     {
-        $balitas = Balita::orderBy('nama_balita')->paginate(10);
+        $balitas = Balita::where('status_verifikasi', 'approved')->orderBy('nama_balita')->paginate(10);
         return view('balita.index', compact('balitas'));
     }
 
@@ -32,7 +32,9 @@ class BalitaController extends Controller
             'alamat'        => 'nullable|string',
         ]);
 
-        Balita::create($request->all());
+        $data = $request->all();
+        $data['status_verifikasi'] = 'approved';
+        Balita::create($data);
         return redirect()->route('balita.index')->with('success', 'Data balita berhasil ditambahkan.');
     }
 

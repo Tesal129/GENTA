@@ -21,7 +21,7 @@ class PemeriksaanController extends Controller
 
     public function create()
     {
-        $balitas = Balita::orderBy('nama_balita')->get();
+        $balitas = Balita::where('status_verifikasi', 'approved')->orderBy('nama_balita')->get();
 
         return view('pemeriksaan.form', compact('balitas'));
     }
@@ -76,7 +76,7 @@ class PemeriksaanController extends Controller
     public function edit(string $id)
     {
         $pemeriksaan = Pemeriksaan::findOrFail($id);
-        $balitas = Balita::orderBy('nama_balita')->get();
+        $balitas = Balita::where('status_verifikasi', 'approved')->orderBy('nama_balita')->get();
 
         return view('pemeriksaan.form', compact('pemeriksaan', 'balitas'));
     }

@@ -272,6 +272,7 @@
         <span>GENTA</span>
     </a>
     <div class="nav-links">
+        <a href="#cek-status">Cek Status</a>
         <a href="#fitur">Fitur</a>
         <a href="#cara-kerja">Cara Kerja</a>
         <a href="#kontak">Kontak</a>
@@ -298,6 +299,7 @@
         <button class="drawer-close" id="navClose"><i class="bi bi-x-lg"></i></button>
     </div>
     <div class="drawer-nav">
+        <a href="#cek-status" onclick="closeDrawer()">Cek Status</a>
         <a href="#fitur"     onclick="closeDrawer()">Fitur</a>
         <a href="#cara-kerja" onclick="closeDrawer()">Cara Kerja</a>
         <a href="#kontak"    onclick="closeDrawer()">Kontak</a>
@@ -317,8 +319,60 @@
         <p>Catatan medis, jadwal imunisasi, dan grafik perkembangan anak — semua dalam satu platform digital yang aman, mudah, dan selalu siap menemanimu.</p>
         <div class="hero-actions">
             <a href="/register" class="btn-hero-primary">Yuk Daftar</a>
-            <a href="#fitur" class="btn-hero-ghost">Lihat Fitur</a>
+            <a href="#cek-status" class="btn-hero-ghost">Cek Pendaftaran</a>
         </div>
+    </div>
+</section>
+
+<!-- ══ CEK STATUS ══ -->
+<section class="section" id="cek-status" style="background: var(--g-bg2); padding: 80px 20px; border-top: 1px solid rgba(14,158,114,.15);">
+    <div class="reveal" style="max-width: 540px; margin: 0 auto; text-align: center; background: #fff; padding: 48px 32px; border-radius: 24px; box-shadow: 0 12px 48px rgba(14,158,114,.08);">
+        <div style="width: 64px; height: 64px; border-radius: 18px; background: var(--g-green-lite); color: var(--g-green); font-size: 28px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
+            <i class="bi bi-search"></i>
+        </div>
+        <h2 style="font-size: 26px; font-weight: 900; color: var(--g-dark); margin-bottom: 12px; letter-spacing: -.02em;">Cek Status Pendaftaran</h2>
+        <p style="font-size: 15px; color: var(--g-muted); margin-bottom: 32px; line-height: 1.6; font-weight: 400;">Masukkan NIK Balita yang telah didaftarkan untuk memantau status verifikasi oleh kader.</p>
+        
+        @if(session('cek_error'))
+            <div style="background: rgba(224, 92, 92, .08); border: 1px solid rgba(224, 92, 92, .25); color: #C53030; padding: 14px; border-radius: 12px; font-size: 13.5px; margin-bottom: 24px; text-align: left; display: flex; align-items: center; gap: 8px;">
+                <i class="bi bi-exclamation-circle-fill"></i> {{ session('cek_error') }}
+            </div>
+        @endif
+
+        @if(session('cek_status'))
+            @php $st = session('cek_status'); @endphp
+            <div style="background: var(--g-bg); border: 1.5px solid var(--g-border); border-radius: 16px; padding: 24px; margin-bottom: 24px; text-align: left;">
+                <h4 style="font-size: 16px; font-weight: 900; color: var(--g-dark); margin-bottom: 12px;">Data Balita: {{ $st['nama'] }}</h4>
+                <div style="font-size: 14px; margin-bottom: 12px;">
+                    Status: 
+                    @if($st['status'] == 'pending')
+                        <span style="background: #FFF3CD; color: #856404; padding: 5px 10px; border-radius: 8px; font-weight: 700;">Menunggu Verifikasi Kader</span>
+                    @elseif($st['status'] == 'approved')
+                        <span style="background: var(--g-green-lite); color: var(--g-green); padding: 5px 10px; border-radius: 8px; font-weight: 700;">Pendaftaran Diterima</span>
+                    @else
+                        <span style="background: rgba(224, 92, 92, .08); color: #C53030; padding: 5px 10px; border-radius: 8px; font-weight: 700;">Ditolak</span>
+                    @endif
+                </div>
+                @if($st['status'] == 'rejected' && $st['alasan'])
+                    <p style="font-size: 14px; color: var(--g-text2); margin-top: 10px;"><strong>Alasan:</strong> {{ $st['alasan'] }}</p>
+                    <a href="/register" style="display: inline-block; margin-top: 14px; font-size: 14px; font-weight: 700; color: var(--g-blue); text-decoration: none;"><i class="bi bi-arrow-right"></i> Daftar Ulang</a>
+                @endif
+                @if($st['status'] == 'pending')
+                    <p style="font-size: 14px; color: var(--g-muted); margin-top: 12px; line-height: 1.5;">Kader posyandu sedang mengecek keabsahan foto KK yang kamu unggah.</p>
+                @endif
+            </div>
+        @endif
+
+        <form action="{{ route('register.cek_status') }}" method="POST">
+            @csrf
+            <div style="display: flex; gap: 12px; @media(max-width: 480px){ flex-direction: column; }">
+                <input type="text" name="nik_balita" placeholder="Masukkan 16 digit NIK Balita..." maxlength="16" required style="flex: 1; border: 1.5px solid var(--g-border); padding: 15px 20px; border-radius: 14px; font-size: 15px; outline: none; transition: all .2s; font-family: 'Lato', sans-serif;">
+                <button type="submit" style="background: var(--g-green); color: #fff; border: none; padding: 15px 28px; border-radius: 14px; font-size: 15px; font-weight: 700; cursor: pointer; transition: background .2s; font-family: 'Lato', sans-serif;">Cek</button>
+            </div>
+            @error('nik_balita')
+                <div style="text-align: left; font-size: 13px; color: #C53030; margin-top: 10px;">{{ $message }}</div>
+            @enderror
+        </form>
     </div>
 </section>
 

@@ -236,6 +236,27 @@
             transition: border-color .2s, background .2s, box-shadow .2s;
         }
 
+        .form-control[type="file"] {
+            padding: 8px 14px 8px 38px;
+            background: var(--g-white);
+        }
+        
+        .form-control[type="file"]::file-selector-button {
+            border: none;
+            background: rgba(21, 101, 192, 0.1);
+            padding: 6px 12px;
+            border-radius: 6px;
+            color: var(--g-blue);
+            cursor: pointer;
+            margin-right: 12px;
+            font-weight: 600;
+            transition: background .2s;
+        }
+
+        .form-control[type="file"]::file-selector-button:hover {
+            background: rgba(21, 101, 192, 0.2);
+        }
+
         select.form-control {
             padding-left: 38px;
             appearance: none;
@@ -366,7 +387,7 @@
 
         <div class="auth-card">
             <h1>Daftarkan Balita Kesayanganmu</h1>
-            <p class="subtitle">Isi data di bawah ini untuk mendaftarkan balita ke posyandu. Tidak perlu akun.</p>
+            <p class="subtitle">Isi data di bawah ini untuk mendaftarkan balita ke posyandu. Pendaftaran akan diverifikasi oleh kader.</p>
 
             {{-- Pesan sukses --}}
             @if(session('success'))
@@ -380,109 +401,36 @@
             @if($errors->any())
             <div class="alert-error">
                 <i class="bi bi-exclamation-circle-fill"></i>
-                {{ $errors->first() }}
+                Ada kesalahan pada pengisian form. Silakan periksa kembali data Anda.
             </div>
             @endif
 
-            <form method="POST" action="{{ route('register.store') }}">
+            <form method="POST" action="{{ route('register.store') }}" enctype="multipart/form-data">
                 @csrf
-
-                <!-- ══════ DATA BALITA ══════ -->
-                <div class="form-section-label">
-                    <i class="bi bi-person-heart"></i> Data Balita
-                </div>
-
-                <div class="form-group">
-                    <label for="nama_balita">Nama Lengkap Balita</label>
-                    <div class="input-wrap">
-                        <i class="bi bi-person"></i>
-                        <input
-                            type="text"
-                            id="nama_balita"
-                            name="nama_balita"
-                            class="form-control {{ $errors->has('nama_balita') ? 'is-invalid' : '' }}"
-                            placeholder="Nama lengkap sesuai akta"
-                            value="{{ old('nama_balita') }}"
-                            autofocus
-                        >
-                    </div>
-                    @error('nama_balita')
-                    <div class="invalid-feedback"><i class="bi bi-exclamation-circle"></i> {{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="tanggal_lahir">Tanggal Lahir</label>
-                        <div class="input-wrap">
-                            <i class="bi bi-calendar3"></i>
-                            <input
-                                type="date"
-                                id="tanggal_lahir"
-                                name="tanggal_lahir"
-                                class="form-control {{ $errors->has('tanggal_lahir') ? 'is-invalid' : '' }}"
-                                value="{{ old('tanggal_lahir') }}"
-                            >
-                        </div>
-                        @error('tanggal_lahir')
-                        <div class="invalid-feedback"><i class="bi bi-exclamation-circle"></i> {{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <div class="form-group">
-                        <label for="jenis_kelamin">Jenis Kelamin</label>
-                        <div class="input-wrap">
-                            <i class="bi bi-gender-ambiguous"></i>
-                            <select id="jenis_kelamin" name="jenis_kelamin" class="form-control {{ $errors->has('jenis_kelamin') ? 'is-invalid' : '' }}">
-                                <option value="">Pilih</option>
-                                <option value="L" {{ old('jenis_kelamin') === 'L' ? 'selected' : '' }}>Laki-laki</option>
-                                <option value="P" {{ old('jenis_kelamin') === 'P' ? 'selected' : '' }}>Perempuan</option>
-                            </select>
-                        </div>
-                        @error('jenis_kelamin')
-                        <div class="invalid-feedback"><i class="bi bi-exclamation-circle"></i> {{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="nik_balita">NIK Balita <span style="color:var(--g-muted);font-weight:400">(opsional)</span></label>
-                    <div class="input-wrap">
-                        <i class="bi bi-card-text"></i>
-                        <input
-                            type="text"
-                            id="nik_balita"
-                            name="nik_balita"
-                            class="form-control {{ $errors->has('nik_balita') ? 'is-invalid' : '' }}"
-                            placeholder="16 digit sesuai KK"
-                            maxlength="16"
-                            value="{{ old('nik_balita') }}"
-                        >
-                    </div>
-                    @error('nik_balita')
-                    <div class="invalid-feedback"><i class="bi bi-exclamation-circle"></i> {{ $message }}</div>
-                    @enderror
-                </div>
 
                 <!-- ══════ DATA ORANG TUA ══════ -->
                 <div class="form-section-label">
-                    <i class="bi bi-people"></i> Data Orang Tua
+                    <i class="bi bi-people"></i> 1. Data Orang Tua
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="nama_ibu">Nama Ibu</label>
+                        <label for="nama_ibu">Nama Ibu *</label>
                         <div class="input-wrap">
                             <i class="bi bi-person-heart"></i>
                             <input
                                 type="text"
                                 id="nama_ibu"
                                 name="nama_ibu"
-                                class="form-control"
+                                class="form-control {{ $errors->has('nama_ibu') ? 'is-invalid' : '' }}"
                                 placeholder="Nama ibu kandung"
                                 value="{{ old('nama_ibu') }}"
+                                autofocus
                             >
                         </div>
+                        @error('nama_ibu')
+                        <div class="invalid-feedback"><i class="bi bi-exclamation-circle"></i> {{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="form-group">
@@ -502,7 +450,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="no_hp_ortu">Nomor HP / WhatsApp</label>
+                    <label for="no_hp_ortu">Nomor HP / WhatsApp *</label>
                     <div class="input-wrap">
                         <i class="bi bi-telephone"></i>
                         <input
@@ -517,17 +465,120 @@
                     @error('no_hp_ortu')
                     <div class="invalid-feedback"><i class="bi bi-exclamation-circle"></i> {{ $message }}</div>
                     @enderror
-                    <div class="hint">Akan dihubungi kader untuk konfirmasi jadwal posyandu.</div>
+                    <div class="hint">Akan dihubungi kader jika perlu konfirmasi lebih lanjut.</div>
                 </div>
 
                 <div class="form-group">
-                    <label for="alamat">Alamat Tempat Tinggal</label>
+                    <label for="alamat">Alamat Tempat Tinggal *</label>
                     <textarea
                         id="alamat"
                         name="alamat"
-                        class="form-control"
+                        class="form-control {{ $errors->has('alamat') ? 'is-invalid' : '' }}"
                         placeholder="Alamat lengkap sesuai domisili"
                     >{{ old('alamat') }}</textarea>
+                    @error('alamat')
+                    <div class="invalid-feedback"><i class="bi bi-exclamation-circle"></i> {{ $message }}</div>
+                    @enderror
+                </div>
+
+                <!-- ══════ UPLOAD DOKUMEN ══════ -->
+                <div class="form-section-label">
+                    <i class="bi bi-file-earmark-arrow-up"></i> 2. Dokumen Validasi
+                </div>
+
+                <div class="form-group">
+                    <label for="foto_kk">Upload Foto Kartu Keluarga (KK) *</label>
+                    <div class="input-wrap">
+                        <i class="bi bi-image"></i>
+                        <input
+                            type="file"
+                            id="foto_kk"
+                            name="foto_kk"
+                            class="form-control {{ $errors->has('foto_kk') ? 'is-invalid' : '' }}"
+                            accept="image/jpeg,image/png,image/jpg"
+                        >
+                    </div>
+                    @error('foto_kk')
+                    <div class="invalid-feedback"><i class="bi bi-exclamation-circle"></i> {{ $message }}</div>
+                    @enderror
+                    <div class="hint">Upload foto KK asli atau fotokopi yang jelas terbaca (Maks. 5MB). Data ini bersifat rahasia dan aman.</div>
+                </div>
+
+                <!-- ══════ DATA BALITA ══════ -->
+                <div class="form-section-label">
+                    <i class="bi bi-person-heart"></i> 3. Data Balita
+                </div>
+
+                <div class="form-group">
+                    <label for="nik_balita">NIK Balita *</label>
+                    <div class="input-wrap">
+                        <i class="bi bi-card-text"></i>
+                        <input
+                            type="text"
+                            id="nik_balita"
+                            name="nik_balita"
+                            class="form-control {{ $errors->has('nik_balita') ? 'is-invalid' : '' }}"
+                            placeholder="16 digit NIK balita di KK"
+                            maxlength="16"
+                            value="{{ old('nik_balita') }}"
+                        >
+                    </div>
+                    @error('nik_balita')
+                    <div class="invalid-feedback"><i class="bi bi-exclamation-circle"></i> {{ $message }}</div>
+                    @enderror
+                    <div class="hint">Penting: NIK ini akan digunakan untuk fitur Cek Status Pendaftaran Anda.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="nama_balita">Nama Lengkap Balita *</label>
+                    <div class="input-wrap">
+                        <i class="bi bi-person"></i>
+                        <input
+                            type="text"
+                            id="nama_balita"
+                            name="nama_balita"
+                            class="form-control {{ $errors->has('nama_balita') ? 'is-invalid' : '' }}"
+                            placeholder="Nama lengkap balita"
+                            value="{{ old('nama_balita') }}"
+                        >
+                    </div>
+                    @error('nama_balita')
+                    <div class="invalid-feedback"><i class="bi bi-exclamation-circle"></i> {{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="tanggal_lahir">Tanggal Lahir *</label>
+                        <div class="input-wrap">
+                            <i class="bi bi-calendar3"></i>
+                            <input
+                                type="date"
+                                id="tanggal_lahir"
+                                name="tanggal_lahir"
+                                class="form-control {{ $errors->has('tanggal_lahir') ? 'is-invalid' : '' }}"
+                                value="{{ old('tanggal_lahir') }}"
+                            >
+                        </div>
+                        @error('tanggal_lahir')
+                        <div class="invalid-feedback"><i class="bi bi-exclamation-circle"></i> {{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jenis_kelamin">Jenis Kelamin *</label>
+                        <div class="input-wrap">
+                            <i class="bi bi-gender-ambiguous"></i>
+                            <select id="jenis_kelamin" name="jenis_kelamin" class="form-control {{ $errors->has('jenis_kelamin') ? 'is-invalid' : '' }}">
+                                <option value="">Pilih</option>
+                                <option value="L" {{ old('jenis_kelamin') === 'L' ? 'selected' : '' }}>Laki-laki</option>
+                                <option value="P" {{ old('jenis_kelamin') === 'P' ? 'selected' : '' }}>Perempuan</option>
+                            </select>
+                        </div>
+                        @error('jenis_kelamin')
+                        <div class="invalid-feedback"><i class="bi bi-exclamation-circle"></i> {{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
 
                 <button type="submit" class="btn-submit">
@@ -546,5 +597,3 @@
     </div>
 </body>
 </html>
-
-

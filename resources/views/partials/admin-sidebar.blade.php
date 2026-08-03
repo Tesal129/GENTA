@@ -55,9 +55,16 @@ body.dark-mode .alert {
         <a href="{{ route('dashboard') }}" class="nav-item {{ ($active ?? '') === 'dashboard' ? 'active' : '' }}">
             <i class="bi bi-grid-1x2-fill"></i> Dashboard
         </a>
+        <a href="{{ route('verifikasi.index') }}" class="nav-item {{ ($active ?? '') === 'verifikasi' ? 'active' : '' }}">
+            <i class="bi bi-check-circle"></i> Verifikasi Pendaftaran
+            @php $pendingCount = \App\Models\Balita::where('status_verifikasi', 'pending')->count(); @endphp
+            @if($pendingCount > 0)
+                <span class="nav-badge" style="background:#E05C5C;">{{ $pendingCount }}</span>
+            @endif
+        </a>
         <a href="{{ route('balita.index') }}" class="nav-item {{ ($active ?? '') === 'balita' ? 'active' : '' }}">
             <i class="bi bi-person-heart"></i> Data Balita
-            <span class="nav-badge">{{ \App\Models\Balita::count() }}</span>
+            <span class="nav-badge">{{ \App\Models\Balita::where('status_verifikasi', 'approved')->count() }}</span>
         </a>
         <a href="{{ route('pemeriksaan.index') }}" class="nav-item {{ ($active ?? '') === 'pemeriksaan' ? 'active' : '' }}">
             <i class="bi bi-clipboard2-pulse"></i> Pemeriksaan

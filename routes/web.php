@@ -26,6 +26,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // ── Register Balita (publik, tanpa akun) ────────────────────────
 Route::get('/register',  [PublicRegisterController::class, 'show'])->name('register');
 Route::post('/register', [PublicRegisterController::class, 'store'])->name('register.store');
+Route::post('/cek-status', [PublicRegisterController::class, 'cekStatus'])->name('register.cek_status');
 
 // ── Register Kader (bikin akun login) ───────────────────────────
 Route::get('/register-kader',  [AuthController::class, 'showRegisterKader'])->name('register.kader');
@@ -34,6 +35,12 @@ Route::post('/register-kader', [AuthController::class, 'registerKader'])->name('
 
 Route::middleware(['auth', \App\Http\Middleware\CheckOfficerRole::class])->group(function () {
     Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
+
+    // Verifikasi Pendaftaran
+    Route::get('/verifikasi', [\App\Http\Controllers\VerifikasiController::class, 'index'])->name('verifikasi.index');
+    Route::post('/verifikasi/{id}/approve', [\App\Http\Controllers\VerifikasiController::class, 'approve'])->name('verifikasi.approve');
+    Route::post('/verifikasi/{id}/reject', [\App\Http\Controllers\VerifikasiController::class, 'reject'])->name('verifikasi.reject');
+    Route::get('/verifikasi/kk/{filename}', [\App\Http\Controllers\VerifikasiController::class, 'showKk'])->name('verifikasi.kk');
 
     // Balita
     Route::resource('balita', BalitaController::class);
