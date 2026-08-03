@@ -43,7 +43,7 @@ class PublicRegisterController extends Controller
         if ($request->hasFile('foto_kk')) {
             $file = $request->file('foto_kk');
             $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
-            $file->storeAs('private/kk', $filename);
+            $file->storeAs('kk', $filename);
             $data['foto_kk'] = $filename;
         }
 
